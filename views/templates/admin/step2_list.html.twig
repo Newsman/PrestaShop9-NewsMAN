@@ -1,0 +1,40 @@
+{% extends '@PrestaShop/Admin/layout.html.twig' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-header-title">{{ 'Select Email List'|trans({}, 'Modules.Newsman.Admin') }}</h3>
+    </div>
+    <div class="card-body">
+        <form method="post" action="{{ path('newsman_oauth_save_list') }}">
+            <input type="hidden" name="user_id" value="{{ userId }}">
+            <input type="hidden" name="api_key" value="{{ apiKey }}">
+
+            <div class="form-group row">
+                <label for="list_id" class="form-control-label col-md-3">
+                    {{ 'Email List'|trans({}, 'Modules.Newsman.Admin') }}
+                </label>
+                <div class="col-md-5">
+                    <select name="list_id" id="list_id" class="form-control" required>
+                        <option value="">-- {{ 'Select a list'|trans({}, 'Modules.Newsman.Admin') }} --</option>
+                        {% for list in lists %}
+                        <option value="{{ list.list_id }}">{{ list.list_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-5 offset-md-3">
+                    <button type="submit" class="btn btn-primary">
+                        {{ 'Save'|trans({}, 'Admin.Actions') }}
+                    </button>
+                    <a href="{{ path('newsman_oauth_step1') }}" class="btn btn-outline-secondary ml-2 ms-2">
+                        {{ 'Back'|trans({}, 'Admin.Actions') }}
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

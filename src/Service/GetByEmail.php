@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * Copyright © Dazoot Software S.R.L. All rights reserved.
+ *
+ * @website https://www.newsman.ro/
+ *
+ * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
+
+namespace PrestaShop\Module\Newsman\Service;
+
+use PrestaShop\Module\Newsman\Service\Context\AbstractContext;
+use PrestaShop\Module\Newsman\Service\Context\GetByEmail as GetByEmailContext;
+
+class GetByEmail extends AbstractService
+{
+    public const ENDPOINT = 'subscriber.getByEmail';
+
+    /**
+     * @param GetByEmailContext $context
+     *
+     * @return array<mixed>|string
+     *
+     * @throws \RuntimeException
+     */
+    public function execute(AbstractContext $context): array|string
+    {
+        $this->validateEmail($context->getEmail());
+
+        $apiContext = $this->createApiContext()
+            ->setListId($context->getListId())
+            ->setEndpoint(self::ENDPOINT);
+
+        $this->logger->info(sprintf('Try to get by email %s', $context->getEmail()));
+
+        $client = $this->createApiClient();
+        $result = $client->get(
+            $apiContext,
+            [
+                'list_id' => $apiContext->getListId(),
+                'email' => $context->getEmail(),
+            ]
+        );
+
+        if ($client->hasError()) {
+            throw new \RuntimeException($client->getErrorMessage(), $client->getErrorCode());
+        }
+
+        $this->logger->info(sprintf('Done get by email %s', $context->getEmail()));
+
+        return $result;
+    }
+}

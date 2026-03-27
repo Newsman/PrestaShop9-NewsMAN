@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * Copyright © Dazoot Software S.R.L. All rights reserved.
+ *
+ * @website https://www.newsman.ro/
+ *
+ * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
+
+namespace PrestaShop\Module\Newsman\Export\Retriever;
+
+use PrestaShop\Module\Newsman\Action\Reverse\NewsletterManager;
+use PrestaShop\Module\Newsman\Config;
+use PrestaShop\Module\Newsman\Export\V1\ApiV1Exception;
+use PrestaShop\Module\Newsman\Logger;
+
+class SubscriberSubscribe extends AbstractRetriever implements RetrieverInterface
+{
+    protected NewsletterManager $newsletterManager;
+
+    public function __construct(Config $config, Logger $logger, NewsletterManager $newsletterManager)
+    {
+        parent::__construct($config, $logger);
+        $this->newsletterManager = $newsletterManager;
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     *
+     * @return array<mixed>
+     */
+    /**
+     * @param array<int> $shopIds
+     */
+    public function process(array $data = [], array $shopIds = []): array
+    {
+        $email = isset($data['email']) ? trim((string) $data['email']) : '';
+        if (empty($email)) {
+            throw new ApiV1Exception(3100, 'Missing "email" parameter', 400);
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new ApiV1Exception(3101, 'Invalid email address: ' . $email, 400);
+        }
+
+        $this->logger->info(sprintf('subscriber.subscribe: %s, shop IDs [%s]', $email, implode(',', $shopIds)));
+
+        $this->newsletterManager->subscribeMultiShop($email, $shopIds);
+
+        return ['success' => true, 'email' => $email];
+    }
+}

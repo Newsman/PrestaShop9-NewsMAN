@@ -1,0 +1,192 @@
+<?php
+
+/**
+ * Copyright © Dazoot Software S.R.L. All rights reserved.
+ *
+ * @website https://www.newsman.ro/
+ *
+ * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
+
+declare(strict_types=1);
+
+namespace PrestaShop\Module\Newsman\Controller\Admin;
+
+use PrestaShop\Module\Newsman\Config;
+use PrestaShop\Module\Newsman\Logger;
+use PrestaShop\Module\Newsman\Service\Configuration\Integration\SaveListIntegrationSetup;
+use PrestaShop\Module\Newsman\Service\Configuration\Remarketing\GetSettings as RemarketingGetSettings;
+use PrestaShop\Module\Newsman\Service\Context\Configuration\EmailList as EmailListContext;
+use PrestaShop\Module\Newsman\Service\Context\Configuration\SaveListIntegrationSetup as SaveListIntegrationSetupContext;
+use PrestaShop\Module\Newsman\Util\ServerIpResolver;
+use PrestaShop\Module\Newsman\Util\Version;
+use PrestaShop\PrestaShop\Adapter\Configuration as ConfigurationAdapter;
+use PrestaShop\PrestaShop\Core\Domain\Shop\ValueObject\ShopConstraint;
+use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
+use PrestaShopBundle\Security\Attribute\AdminSecurity;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+
+class OauthSaveListController extends PrestaShopAdminController
+{
+    #[AdminSecurity("is_granted('update', request.get('_legacy_controller'))", message: 'Access denied.', redirectRoute: 'newsman_oauth_step1')]
+    public function indexAction(
+        Request $request,
+        ConfigurationAdapter $configuration,
+        Config $newsmanConfig,
+        Logger $logger,
+        RemarketingGetSettings $remarketingGetSettings,
+        SaveListIntegrationSetup $saveListIntegrationSetup,
+        ServerIpResolver $serverIpResolver,
+    ): RedirectResponse {
+        $userId = $request->request->get('user_id', '');
+        $apiKey = $request->request->get('api_key', '');
+        $listId = $request->request->get('list_id', '');
+
+        if (empty($userId) || empty($apiKey) || empty($listId)) {
+            $this->addFlash('error', 'Missing required fields.');
+
+            return $this->redirectToRoute('newsman_oauth_step1');
+        }
+
+        $configuration->set(Config::KEY_USER_ID, $userId);
+        $configuration->set(Config::KEY_API_KEY, $apiKey);
+        $configuration->set(Config::KEY_LIST_ID, $listId);
+
+        $authenticateToken = Config::generateToken(32);
+        $configuration->set(Config::KEY_AUTHENTICATE_TOKEN, $authenticateToken);
+
+        $remarketingData = $this->fetchAndSaveRemarketingSettings(
+            $configuration,
+            $logger,
+            $remarketingGetSettings,
+            $userId,
+            $apiKey,
+            $listId,
+        );
+
+        $this->callSaveListIntegrationSetup(
+            $logger,
+            $saveListIntegrationSetup,
+            $serverIpResolver,
+            $userId,
+            $apiKey,
+            $listId,
+            $authenticateToken,
+        );
+
+        // Propagate authenticate token and remarketing settings to all linked shops
+        $linkedShopIds = $newsmanConfig->getShopIdsByListId($listId);
+        $this->propagateToLinkedShops($configuration, $linkedShopIds, $authenticateToken, $remarketingData);
+
+        $this->addFlash('success', 'Connected to Newsman successfully.');
+
+        return $this->redirectToRoute('newsman_configuration');
+    }
+
+    /**
+     * @return array{tracking_id: string, script_js: string}
+     */
+    public function fetchAndSaveRemarketingSettings(
+        ConfigurationAdapter $configuration,
+        Logger $logger,
+        RemarketingGetSettings $remarketingGetSettings,
+        string $userId,
+        string $apiKey,
+        string $listId,
+    ): array {
+        $remarketingData = ['tracking_id' => '', 'script_js' => ''];
+
+        try {
+            $context = (new EmailListContext())
+                ->setUserId($userId)
+                ->setApiKey($apiKey)
+                ->setListId($listId);
+
+            $result = $remarketingGetSettings->execute($context);
+            if (is_array($result)) {
+                $siteId = $result['site_id'] ?? '';
+                $formId = $result['form_id'] ?? '';
+                $controlListHash = $result['control_list_hash'] ?? '';
+
+                if (!empty($siteId) && !empty($formId)) {
+                    $trackingId = $siteId . '-' . $listId . '-' . $formId . '-' . $controlListHash;
+                    $configuration->set(Config::KEY_REMARKETING_ID, $trackingId);
+                    $configuration->set(Config::KEY_REMARKETING_STATUS, '1');
+                    $remarketingData['tracking_id'] = $trackingId;
+                }
+
+                if (!empty($result['javascript'])) {
+                    $scriptJs = Config::stripScriptTags($result['javascript']);
+                    $configuration->set(Config::KEY_REMARKETING_SCRIPT_JS, $scriptJs);
+                    $remarketingData['script_js'] = $scriptJs;
+                }
+            }
+        } catch (\Throwable $e) {
+            $logger->logException($e);
+        }
+
+        return $remarketingData;
+    }
+
+    /**
+     * Propagate authenticate token and remarketing settings to all linked shops.
+     *
+     * @param array<int> $linkedShopIds
+     * @param array{tracking_id: string, script_js: string} $remarketingData
+     */
+    protected function propagateToLinkedShops(
+        ConfigurationAdapter $configuration,
+        array $linkedShopIds,
+        string $authenticateToken,
+        array $remarketingData,
+    ): void {
+        foreach ($linkedShopIds as $linkedShopId) {
+            $sc = ShopConstraint::shop((int) $linkedShopId);
+            $configuration->set(Config::KEY_AUTHENTICATE_TOKEN, $authenticateToken, $sc);
+
+            if (!empty($remarketingData['tracking_id'])) {
+                $configuration->set(Config::KEY_REMARKETING_ID, $remarketingData['tracking_id'], $sc);
+                $configuration->set(Config::KEY_REMARKETING_STATUS, '1', $sc);
+            }
+            if (!empty($remarketingData['script_js'])) {
+                $configuration->set(Config::KEY_REMARKETING_SCRIPT_JS, $remarketingData['script_js'], $sc);
+            }
+        }
+    }
+
+    public function callSaveListIntegrationSetup(
+        Logger $logger,
+        SaveListIntegrationSetup $saveListIntegrationSetup,
+        ServerIpResolver $serverIpResolver,
+        string $userId,
+        string $apiKey,
+        string $listId,
+        string $authenticateToken,
+    ): void {
+        try {
+            $shopUrl = \Tools::getShopDomainSsl(true);
+            $apiUrl = $shopUrl . '/index.php?fc=module&module=newsman&controller=api';
+            $serverIp = $serverIpResolver->resolve();
+
+            $context = (new SaveListIntegrationSetupContext())
+                ->setUserId($userId)
+                ->setApiKey($apiKey)
+                ->setListId($listId)
+                ->setIntegration('prestashop')
+                ->setPayload([
+                    'api_url' => $apiUrl,
+                    'api_key' => $authenticateToken,
+                    'plugin_version' => Version::getModuleVersion(),
+                    'platform_version' => _PS_VERSION_,
+                    'platform_language' => 'PHP',
+                    'platform_language_version' => phpversion(),
+                    'platform_server_ip' => $serverIp,
+                ]);
+
+            $saveListIntegrationSetup->execute($context);
+        } catch (\Throwable $e) {
+            $logger->logException($e);
+        }
+    }
+}

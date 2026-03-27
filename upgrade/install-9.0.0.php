@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * Copyright © Dazoot Software S.R.L. All rights reserved.
+ *
+ * @website https://www.newsman.ro/
+ *
+ * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
+/**
+ * @param Newsman $module
+ *
+ * @return bool
+ */
+function upgrade_module_9_0_0($module)
+{
+    return $module->installDefaultConfiguration();
+}

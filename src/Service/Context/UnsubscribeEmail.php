@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * Copyright © Dazoot Software S.R.L. All rights reserved.
+ *
+ * @website https://www.newsman.ro/
+ *
+ * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
+
+namespace PrestaShop\Module\Newsman\Service\Context;
+
+class UnsubscribeEmail extends Store
+{
+    protected string $email = '';
+    protected string $ip = '';
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function setIp(string $ip): static
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    public function getIp(): string
+    {
+        return $this->ip;
+    }
+}

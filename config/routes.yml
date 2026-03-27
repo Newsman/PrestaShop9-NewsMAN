@@ -1,0 +1,43 @@
+newsman_configuration:
+  path: newsman/configuration
+  methods: [GET, POST, PATCH]
+  defaults:
+    _controller: PrestaShop\Module\Newsman\Controller\Admin\ConfigurationController::indexAction
+    _legacy_controller: 'NewsmanConfigurationAdminController'
+    _legacy_link: 'NewsmanConfigurationAdminController'
+
+newsman_oauth_step1:
+  path: newsman/oauth/step1
+  methods: [GET]
+  defaults:
+    _controller: PrestaShop\Module\Newsman\Controller\Admin\OauthLoginController::indexAction
+    _legacy_controller: 'NewsmanConfigurationAdminController'
+
+newsman_oauth_callback:
+  path: newsman/oauth/callback
+  methods: [GET]
+  defaults:
+    _controller: PrestaShop\Module\Newsman\Controller\Admin\OauthCallbackController::indexAction
+    _legacy_controller: 'NewsmanConfigurationAdminController'
+
+newsman_log_viewer:
+  path: newsman/logs
+  methods: [GET]
+  defaults:
+    _controller: PrestaShop\Module\Newsman\Controller\Admin\LogViewerController::indexAction
+    _legacy_controller: 'NewsmanLogViewerAdminController'
+    _legacy_link: 'NewsmanLogViewerAdminController'
+
+newsman_log_delete:
+  path: newsman/logs/delete
+  methods: [POST]
+  defaults:
+    _controller: PrestaShop\Module\Newsman\Controller\Admin\LogViewerController::deleteAction
+    _legacy_controller: 'NewsmanLogViewerAdminController'
+
+newsman_oauth_save_list:
+  path: newsman/oauth/save-list
+  methods: [POST]
+  defaults:
+    _controller: PrestaShop\Module\Newsman\Controller\Admin\OauthSaveListController::indexAction
+    _legacy_controller: 'NewsmanConfigurationAdminController'

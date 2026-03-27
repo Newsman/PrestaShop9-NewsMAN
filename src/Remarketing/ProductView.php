@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * Copyright © Dazoot Software S.R.L. All rights reserved.
+ *
+ * @website https://www.newsman.ro/
+ *
+ * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
+
+namespace PrestaShop\Module\Newsman\Remarketing;
+
+class ProductView
+{
+    /**
+     * Generate product detail view JS.
+     */
+    public function getHtml(int $productId, int $langId): string
+    {
+        if (empty($productId)) {
+            return '';
+        }
+
+        $product = new \Product($productId, false, $langId);
+        if (!\Validate::isLoadedObject($product)) {
+            return '';
+        }
+
+        $categoryName = '';
+        $defaultCategoryId = (int) $product->id_category_default;
+        if ($defaultCategoryId > 0) {
+            $categoryName = $this->getCategoryName($defaultCategoryId, $langId);
+        }
+
+        $price = (float) $product->getPrice(true);
+        $run = JsHelper::getRunFunc();
+
+        $js = $run . "('ec:addProduct', {"
+            . "'id': '" . JsHelper::escapeHtml((string) $productId) . "',"
+            . "'name': '" . JsHelper::escapeJs($product->name) . "',"
+            . "'category': '" . JsHelper::escapeJs($categoryName) . "',"
+            . "'price': '" . number_format($price, 2, '.', '') . "',"
+            . "'list': 'Product Page'"
+            . '}); ';
+        $js .= $run . "('ec:setAction', 'detail');";
+
+        return '<script>' . $js . '</script>' . "\n";
+    }
+
+    protected function getCategoryName(int $categoryId, int $langId): string
+    {
+        $sql = 'SELECT name FROM ' . _DB_PREFIX_ . 'category_lang'
+            . ' WHERE id_category = ' . $categoryId
+            . ' AND id_lang = ' . $langId
+            . ' AND id_shop = ' . (int) \Context::getContext()->shop->id;
+
+        $result = \Db::getInstance()->getValue($sql);
+
+        return $result ? (string) $result : '';
+    }
+}

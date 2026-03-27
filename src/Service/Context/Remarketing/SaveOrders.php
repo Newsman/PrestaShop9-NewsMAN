@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * Copyright © Dazoot Software S.R.L. All rights reserved.
+ *
+ * @website https://www.newsman.ro/
+ *
+ * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
+
+namespace PrestaShop\Module\Newsman\Service\Context\Remarketing;
+
+use PrestaShop\Module\Newsman\Service\Context\Store;
+
+class SaveOrders extends Store
+{
+    /** @var array<int, array<string, mixed>> */
+    protected array $orders = [];
+
+    /**
+     * @param array<int, array<string, mixed>> $orders
+     */
+    public function setOrders(array $orders): static
+    {
+        $this->orders = $orders;
+
+        return $this;
+    }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function getOrders(): array
+    {
+        return $this->orders;
+    }
+}

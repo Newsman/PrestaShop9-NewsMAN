@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * Copyright © Dazoot Software S.R.L. All rights reserved.
+ *
+ * @website https://www.newsman.ro/
+ *
+ * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
+
+namespace PrestaShop\Module\Newsman\Remarketing;
+
+class CategoryView
+{
+    /**
+     * Generate category view JS with ec:addImpression for each product.
+     *
+     * @param array<array<string, mixed>> $products
+     */
+    public function getHtml(int $categoryId, array $products, int $langId): string
+    {
+        if (empty($categoryId) || empty($products)) {
+            return '';
+        }
+
+        $categoryName = $this->getCategoryName($categoryId, $langId);
+        $run = JsHelper::getRunFunc();
+
+        $js = '';
+        $position = 1;
+        foreach ($products as $product) {
+            $productId = (int) ($product['id_product'] ?? 0);
+            $name = (string) ($product['name'] ?? '');
+            $price = isset($product['price_amount'])
+                ? (float) $product['price_amount']
+                : (float) ($product['price'] ?? 0);
+
+            $js .= $run . "('ec:addImpression', {"
+                . 'id: ' . $productId . ','
+                . "name: '" . JsHelper::escapeJs($name) . "',"
+                . "category: '" . JsHelper::escapeJs($categoryName) . "',"
+                . 'price: ' . number_format($price, 2, '.', '') . ','
+                . "list: 'Category Page',"
+                . "position: '" . ($position++) . "'"
+                . '}); ';
+        }
+
+        return '<script>' . $js . '</script>' . "\n";
+    }
+
+    protected function getCategoryName(int $categoryId, int $langId): string
+    {
+        $sql = 'SELECT name FROM ' . _DB_PREFIX_ . 'category_lang'
+            . ' WHERE id_category = ' . $categoryId
+            . ' AND id_lang = ' . $langId
+            . ' AND id_shop = ' . (int) \Context::getContext()->shop->id;
+
+        $result = \Db::getInstance()->getValue($sql);
+
+        return $result ? (string) $result : '';
+    }
+}

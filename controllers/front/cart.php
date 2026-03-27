@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * Copyright © Dazoot Software S.R.L. All rights reserved.
+ *
+ * @website https://www.newsman.ro/
+ *
+ * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
+/**
+ * @see ModuleFrontControllerCore
+ */
+class NewsmanCartModuleFrontController extends ModuleFrontController
+{
+    public $ssl = true;
+
+    public function initContent()
+    {
+        parent::initContent();
+
+        $cart = $this->context->cart;
+        $products = [];
+
+        if ($cart && $cart->id) {
+            $cartProducts = $cart->getProducts();
+            foreach ($cartProducts as $product) {
+                $price = (float) ($product['price_wt'] ?? $product['price']);
+                $products[] = [
+                    'id' => (string) $product['id_product'],
+                    'name' => (string) $product['name'],
+                    'price' => round($price, 2),
+                    'quantity' => (int) $product['cart_quantity'],
+                ];
+            }
+        }
+
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Origin: *');
+        echo json_encode($products);
+        exit;
+    }
+}
