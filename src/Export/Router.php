@@ -80,6 +80,15 @@ class Router
                 return;
             }
 
+            // Block legacy access for endpoints available in API v1.
+            if (in_array($code, PayloadParser::$methodMap, true)) {
+                $this->renderer->displayJson([
+                    'error' => 'This endpoint is only available via API v1 (JSON POST).',
+                ]);
+
+                return;
+            }
+
             $result = $this->processor->process($code, $shopId, $parameters);
 
             $this->renderer->displayJson($result);
