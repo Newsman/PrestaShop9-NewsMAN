@@ -63,7 +63,17 @@ class ConfigurationController extends PrestaShopAdminController
         $listId = $config->getListId();
         $crossGroupInfo = !empty($listId) ? $config->getCrossGroupInfo($listId) : [];
 
+        $authenticateToken = $config->getAuthenticateToken();
+        $maskedToken = '';
+        if (!empty($authenticateToken)) {
+            $len = strlen($authenticateToken);
+            $maskedToken = $len > 7
+                ? substr($authenticateToken, 0, 3) . '****' . substr($authenticateToken, -4)
+                : str_repeat('*', $len);
+        }
+
         return $this->render('@Modules/newsman/views/templates/admin/configure.html.twig', [
+            'maskedAuthenticateToken' => $maskedToken,
             'configurationForm' => $form->createView(),
             'isConnected' => $config->isEnabledWithApiOnly() && !empty($form->get('list_id')->getConfig()->getOption('choices')),
             'isRemarketingConnected' => $this->isRemarketingConnected($config, $remarketingGetSettings, $logger),

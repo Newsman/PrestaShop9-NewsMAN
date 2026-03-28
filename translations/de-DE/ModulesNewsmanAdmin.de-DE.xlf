@@ -254,6 +254,18 @@
         <source>Log file is empty.</source>
         <target state="final">Die Log-Datei ist leer.</target>
       </trans-unit>
+      <trans-unit id="92a9e1b68f03b6c1e5b5d8e1a3d06a93" approved="yes">
+        <source>Authenticate Token</source>
+        <target state="final">Authentifizierungstoken</target>
+      </trans-unit>
+      <trans-unit id="752de4b2657907cc2e89b671f9f41ad1" approved="yes">
+        <source>Used for Newsman API authentication. It is exchanged automatically when the API key, User ID, enabled flag or list is changed, and when reconfigure or login with Newsman is done.</source>
+        <target state="final">Wird f&#xFC;r die Newsman-API-Authentifizierung verwendet. Er wird automatisch ausgetauscht, wenn der API-Schl&#xFC;ssel, die Benutzer-ID, das Aktivierungsflag oder die Liste ge&#xE4;ndert wird, und bei der Neukonfiguration oder Anmeldung mit Newsman.</target>
+      </trans-unit>
+      <trans-unit id="9ba66a9f92056682b7d86a38b4bc18c0" approved="yes">
+        <source>Not set</source>
+        <target state="final">Nicht gesetzt</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -101,6 +101,17 @@
         <hr>
 
         <div class="form-wrapper">
+            <div class="form-group row mb-3">
+                <label class="form-control-label">{{ 'Authenticate Token'|trans({}, 'Modules.Newsman.Admin') }}</label>
+                <div class="col-sm" style="padding-top: 7px;">
+                    {% if maskedAuthenticateToken is not empty %}
+                    <span style="font-family:monospace;font-size:14px;letter-spacing:0.5px;">{{ maskedAuthenticateToken }}</span>
+                    {% else %}
+                    <span style="color:#999;">{{ 'Not set'|trans({}, 'Modules.Newsman.Admin') }}</span>
+                    {% endif %}
+                    <br><small class="text-muted">{{ 'Used for Newsman API authentication. It is exchanged automatically when the API key, User ID, enabled flag or list is changed, and when reconfigure or login with Newsman is done.'|trans({}, 'Modules.Newsman.Admin') }}</small>
+                </div>
+            </div>
             {{ form_row(configurationForm.export_auth_header_name) }}
             {{ form_row(configurationForm.export_auth_header_key) }}
         </div>
