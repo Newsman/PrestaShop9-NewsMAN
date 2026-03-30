@@ -67,8 +67,8 @@ class ConfigurationController extends PrestaShopAdminController
         $maskedToken = '';
         if (!empty($authenticateToken)) {
             $len = strlen($authenticateToken);
-            $maskedToken = $len > 7
-                ? substr($authenticateToken, 0, 3) . '****' . substr($authenticateToken, -4)
+            $maskedToken = $len > 2
+                ? str_repeat('*', $len - 2) . substr($authenticateToken, -2)
                 : str_repeat('*', $len);
         }
 
