@@ -632,4 +632,190 @@ class Newsman extends Module
     public function hookActionFrontControllerSetMedia(array $params): void
     {
     }
+
+    // Custom hooks for 3rd party developers — Action layer.
+
+    public function hookActionNewsmanBeforeSubscribe(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanAfterSubscribe(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanBeforeUnsubscribe(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanAfterUnsubscribe(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanBeforeOrderSave(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanAfterOrderSave(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanWebhookEvent(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanBeforeExport(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanAfterExport(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanRemarketingRender(array $params): void
+    {
+    }
+
+    // Service layer hooks (before API calls).
+
+    public function hookActionNewsmanServiceSubscribeEmailBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanServiceUnsubscribeEmailBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanServiceInitSubscribeEmailBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanServiceExportCsvSubscribersBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanServiceAddSubscriberBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanServiceSaveOrderBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanServiceSaveOrdersBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanServiceSetPurchaseStatusBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanServiceUpdateFeedBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanServiceSetFeedOnListBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanServiceGetListAllBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanServiceGetSegmentAllBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanServiceGetSettingsBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanServiceSaveListIntegrationSetupBefore(array $params): void
+    {
+    }
+
+    // API client hooks.
+
+    public function hookActionNewsmanApiClientGetParamsBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanApiClientPostParamsBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanApiClientRequestParamsBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanApiClientExecuteCurlOptionsBefore(array $params): void
+    {
+    }
+
+    // Remarketing script hooks.
+
+    public function hookActionNewsmanRemarketingTrackingScriptAfter(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanRemarketingTrackingAttributesBefore(array $params): void
+    {
+    }
+
+    // Export retriever hooks.
+
+    public function hookActionNewsmanExportRetrieverProcessListParamsBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanExportRetrieverProcessListParamsAfter(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanExportRetrieverGetStoreUrlBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanExportRetrieverPoolGetRetrieverListBefore(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanExportRequestGetAllKnownParametersAfter(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanExportRetrieverCustomersProcessFetchAfter(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanExportRetrieverCustomersProcessCustomerAfter(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanExportRetrieverSubscribersProcessSubscriberAfter(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanExportRetrieverOrdersProcessFetchAfter(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanExportRetrieverOrdersProcessOrderAfter(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanExportRetrieverProductsFeedProcessFetchAfter(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanExportRetrieverProductsFeedProcessProductAfter(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanExportRetrieverSendSubscribersProcessSubscriberAfter(array $params): void
+    {
+    }
+
+    public function hookActionNewsmanExportRetrieverCouponsProcessCouponBefore(array $params): void
+    {
+    }
 }
