@@ -21,6 +21,7 @@ services:
 
   # Form type (inherits translator + locales from parent)
   PrestaShop\Module\Newsman\Form\ConfigurationType:
+    class: PrestaShop\Module\Newsman\Form\ConfigurationType
     parent: 'form.type.translatable.aware'
     autowire: true
     public: true
