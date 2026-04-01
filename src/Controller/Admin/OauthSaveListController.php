@@ -165,8 +165,8 @@ class OauthSaveListController extends PrestaShopAdminController
         string $authenticateToken,
     ): void {
         try {
-            $shopUrl = \Tools::getShopDomainSsl(true);
-            $apiUrl = $shopUrl . '/index.php?fc=module&module=newsman&controller=api';
+            $shopUrl = \Context::getContext()->shop->getBaseURL(true);
+            $apiUrl = $shopUrl . 'index.php?fc=module&module=newsman&controller=api';
             $serverIp = $serverIpResolver->resolve();
 
             $context = (new SaveListIntegrationSetupContext())

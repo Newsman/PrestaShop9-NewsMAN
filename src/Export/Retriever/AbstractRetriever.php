@@ -235,7 +235,13 @@ abstract class AbstractRetriever implements RetrieverInterface
 
     protected function getShopUrl(?int $shopId = null): string
     {
-        $url = \Tools::getShopDomainSsl(true) . __PS_BASE_URI__;
+        $context = \Context::getContext();
+        if ($shopId !== null && $context->shop && (int) $context->shop->id !== $shopId) {
+            $shop = new \Shop($shopId);
+            $url = $shop->getBaseURL(true);
+        } else {
+            $url = $context->shop->getBaseURL(true);
+        }
 
         $hookResult = \Hook::exec(
             'actionNewsmanExportRetrieverGetStoreUrlBefore',
