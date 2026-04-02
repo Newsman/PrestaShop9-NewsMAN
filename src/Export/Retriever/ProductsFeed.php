@@ -367,12 +367,12 @@ class ProductsFeed extends AbstractRetriever implements RetrieverInterface
 
         while (isset($this->categories[$key][$currentId]) && $failSafe < 30) {
             $category = $this->categories[$key][$currentId];
-            $path[] = $category;
 
             if ($category['parent_id'] == 0 || $category['parent_id'] == $currentId) {
                 break;
             }
 
+            $path[] = $category;
             $currentId = $category['parent_id'];
             ++$failSafe;
         }
