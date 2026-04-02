@@ -23,6 +23,7 @@ use PrestaShop\PrestaShop\Core\Form\FormHandlerInterface;
 use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
 use PrestaShopBundle\Security\Attribute\AdminSecurity;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -80,9 +81,31 @@ class ConfigurationController extends PrestaShopAdminController
             'moduleVersion' => Version::getModuleVersion(),
             'crossGroupInfo' => $crossGroupInfo,
             'isMultistore' => $shopContext->isMultiShopUsed(),
+            'conflictingModules' => $this->detectConflictingModules(),
+            'moduleName' => Config::MODULE_NAME,
             'enableSidebar' => true,
             'help_link' => false,
         ]);
+    }
+
+    /**
+     * Detect conflicting legacy Newsman modules.
+     *
+     * @return list<string>
+     */
+    protected function detectConflictingModules(): array
+    {
+        $conflicting = [];
+        $fs = new Filesystem();
+        $modulesDir = _PS_MODULE_DIR_;
+
+        foreach ([Config::CONFLICTING_MODULE_NEWSMANAPP, Config::CONFLICTING_MODULE_NEWSMANV8] as $moduleName) {
+            if ($fs->exists($modulesDir . $moduleName)) {
+                $conflicting[] = $moduleName;
+            }
+        }
+
+        return $conflicting;
     }
 
     protected function isRemarketingConnected(

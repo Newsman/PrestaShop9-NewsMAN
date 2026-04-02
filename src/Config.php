@@ -57,6 +57,10 @@ class Config
     public const DEFAULT_API_TIMEOUT = 30;
     public const DEFAULT_LOG_CLEAN_DAYS = 30;
 
+    public const MODULE_NAME = 'newsman';
+    public const CONFLICTING_MODULE_NEWSMANAPP = 'newsmanapp';
+    public const CONFLICTING_MODULE_NEWSMANV8 = 'newsmanv8';
+
     public function __construct(
         protected Configuration $configuration,
     ) {

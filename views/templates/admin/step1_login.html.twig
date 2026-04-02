@@ -6,6 +6,15 @@
         <h3 class="card-header-title">{{ 'Connect to Newsman'|trans({}, 'Modules.Newsman.Admin') }}</h3>
     </div>
     <div class="card-body">
+        {% if conflictingModules is defined and conflictingModules is not empty %}
+        <div class="alert alert-danger">
+            <strong>{{ 'Warning'|trans({}, 'Admin.Notifications.Warning') }}:</strong>
+            {{ 'The following legacy Newsman modules were detected and must be removed to avoid conflicts:'|trans({}, 'Modules.Newsman.Admin') }}
+            <strong>{{ conflictingModules|join(', ') }}</strong>.
+            {{ 'Please uninstall and delete them from the modules directory. The current module to use is'|trans({}, 'Modules.Newsman.Admin') }} <strong>{{ moduleName }}</strong>.
+        </div>
+        {% endif %}
+
         <h4>{{ 'Features'|trans({}, 'Modules.Newsman.Admin') }}</h4>
         <ul class="list-unstyled">
             <li>&#10003; {{ 'Sync newsletter subscribers to Newsman'|trans({}, 'Modules.Newsman.Admin') }}</li>

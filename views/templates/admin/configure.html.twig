@@ -11,6 +11,15 @@
     </div>
 
     <div class="card-body">
+        {% if conflictingModules is defined and conflictingModules is not empty %}
+        <div class="alert alert-danger">
+            <strong>{{ 'Warning'|trans({}, 'Admin.Notifications.Warning') }}:</strong>
+            {{ 'The following legacy Newsman modules were detected and must be removed to avoid conflicts:'|trans({}, 'Modules.Newsman.Admin') }}
+            <strong>{{ conflictingModules|join(', ') }}</strong>.
+            {{ 'Please uninstall and delete them from the modules directory. The current module to use is'|trans({}, 'Modules.Newsman.Admin') }} <strong>{{ moduleName }}</strong>.
+        </div>
+        {% endif %}
+
         {{ form_start(configurationForm, {'attr': {'class': 'form'}}) }}
 
         <h4 class="mt-4">{{ 'Account'|trans({}, 'Modules.Newsman.Admin') }}</h4>

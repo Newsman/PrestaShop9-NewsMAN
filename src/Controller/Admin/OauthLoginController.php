@@ -15,11 +15,32 @@ namespace PrestaShop\Module\Newsman\Controller\Admin;
 use PrestaShop\Module\Newsman\Config;
 use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
 use PrestaShopBundle\Security\Attribute\AdminSecurity;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class OauthLoginController extends PrestaShopAdminController
 {
+    /**
+     * Detect conflicting legacy Newsman modules.
+     *
+     * @return list<string>
+     */
+    protected function detectConflictingModules(): array
+    {
+        $conflicting = [];
+        $fs = new Filesystem();
+        $modulesDir = _PS_MODULE_DIR_;
+
+        foreach ([Config::CONFLICTING_MODULE_NEWSMANAPP, Config::CONFLICTING_MODULE_NEWSMANV8] as $moduleName) {
+            if ($fs->exists($modulesDir . $moduleName)) {
+                $conflicting[] = $moduleName;
+            }
+        }
+
+        return $conflicting;
+    }
+
     #[AdminSecurity("is_granted('read', request.get('_legacy_controller'))", message: 'Access denied.')]
     public function indexAction(Request $request, Config $config): Response
     {
@@ -31,6 +52,8 @@ class OauthLoginController extends PrestaShopAdminController
                 . '&nzmplugin=' . Config::PLATFORM_NAME
                 . '&scope=api&redirect_uri=' . urlencode($callbackUrl),
             'hasCredentials' => $config->hasApiAccess(),
+            'conflictingModules' => $this->detectConflictingModules(),
+            'moduleName' => Config::MODULE_NAME,
             'enableSidebar' => true,
             'help_link' => false,
         ]);
