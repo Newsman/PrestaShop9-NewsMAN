@@ -210,12 +210,19 @@ class ProductsFeed extends AbstractRetriever implements RetrieverInterface
     public function processProduct(array $product, int $langId, array $shopIds = []): array
     {
         $shopId = $shopIds[0] ?? null;
-        $baseUrl = $this->getShopUrl($shopId);
         $price = (float) $product['price'];
+        $link = \Context::getContext()->link;
 
         $row = [
             'id' => $product['product_id'],
-            'url' => $baseUrl . $product['link_rewrite'] . '-' . $product['product_id'] . '.html',
+            'url' => $link->getProductLink(
+                (int) $product['product_id'],
+                $product['link_rewrite'],
+                null,
+                null,
+                $langId,
+                $shopId
+            ),
             'name' => $product['name'],
         ];
 
@@ -240,8 +247,11 @@ class ProductsFeed extends AbstractRetriever implements RetrieverInterface
         }
 
         if (!empty($product['id_image'])) {
-            $imageUrl = $baseUrl . $product['id_image'] . '-large_default/' . $product['link_rewrite'] . '.jpg';
-            $row['image_url'] = $imageUrl;
+            $row['image_url'] = $link->getImageLink(
+                $product['link_rewrite'],
+                (int) $product['id_image'],
+                'large_default'
+            );
         } else {
             $row['image_url'] = '';
         }
