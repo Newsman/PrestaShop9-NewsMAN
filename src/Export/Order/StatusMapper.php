@@ -90,7 +90,7 @@ class StatusMapper
     protected function slugify(int $orderStateId): string
     {
         $orderState = new \OrderState($orderStateId, (int) \Configuration::get('PS_LANG_DEFAULT'));
-        $name = isset($orderState->name) ? (string) $orderState->name : '';
+        $name = is_array($orderState->name) ? (string) reset($orderState->name) : (string) $orderState->name;
 
         if (empty($name)) {
             return 'status_' . $orderStateId;
