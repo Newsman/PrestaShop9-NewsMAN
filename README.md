@@ -9,9 +9,6 @@ The [NewsMAN](https://www.newsmanapp.com) module for PrestaShop 9 facilitates se
 
 # Installation
 
-> [!WARNING]
-> If you have an older version of the module installed (previously named `newsmanapp` or `newsman`), you must **uninstall** it first and then **delete** it from **Admin > Modules > Module Manager** before installing version 9.0.0 or greater. The new module uses a different internal name (`newsmanv8`) and cannot upgrade from the old one directly.
-
 ## Manual installation (download archive and upload):
 1. Download the latest **newsmanv8.zip** archive from [releases](https://github.com/Newsman/PrestaShop9-NewsMAN/releases) (Git tags 9.x.x-autoload, link in the right sidebar here on GitHub). The archive newsmanv8.zip contains the module with the generated `vendor/autoload.php` which is required.
 2. Go to **Admin > Modules > Module Manager > Upload a module** and upload the **newsmanv8.zip** archive.
