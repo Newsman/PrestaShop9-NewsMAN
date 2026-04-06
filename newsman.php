@@ -119,6 +119,7 @@ class Newsman extends Module
         $this->tab = 'advertising_marketing';
         $this->version = '9.0.0';
         $this->author = 'Newsman by Dazoot';
+        $this->module_key = '00c167886eb6f3c7d318ea806a563b32';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = [
             'min' => '9.0.0',
