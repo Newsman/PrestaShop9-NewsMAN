@@ -3,6 +3,9 @@
 /**
  * Copyright © Dazoot Software S.R.L. All rights reserved.
  *
+ * @author Newsman by Dazoot <support@newsman.com>
+ * @copyright Copyright © Dazoot Software S.R.L. All rights reserved.
+ *
  * @website https://www.newsman.ro/
  *
  * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
@@ -235,12 +238,12 @@ abstract class AbstractRetriever implements RetrieverInterface
 
     protected function getShopUrl(?int $shopId = null): string
     {
-        $context = \Context::getContext();
-        if ($shopId !== null && $context->shop && (int) $context->shop->id !== $shopId) {
+        $currentShopId = Config::getEffectiveShopId();
+        if ($shopId !== null && $currentShopId !== $shopId) {
             $shop = new \Shop($shopId);
             $url = $shop->getBaseURL(true);
         } else {
-            $url = $context->shop->getBaseURL(true);
+            $url = (new \Shop($currentShopId))->getBaseURL(true);
         }
 
         $hookResult = \Hook::exec(

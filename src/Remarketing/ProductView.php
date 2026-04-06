@@ -3,6 +3,9 @@
 /**
  * Copyright © Dazoot Software S.R.L. All rights reserved.
  *
+ * @author Newsman by Dazoot <support@newsman.com>
+ * @copyright Copyright © Dazoot Software S.R.L. All rights reserved.
+ *
  * @website https://www.newsman.ro/
  *
  * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
@@ -52,7 +55,7 @@ class ProductView
         $sql = 'SELECT name FROM ' . _DB_PREFIX_ . 'category_lang'
             . ' WHERE id_category = ' . $categoryId
             . ' AND id_lang = ' . $langId
-            . ' AND id_shop = ' . (int) \Context::getContext()->shop->id;
+            . ' AND id_shop = ' . (int) \Shop::getContextShopID();
 
         $result = \Db::getInstance()->getValue($sql);
 

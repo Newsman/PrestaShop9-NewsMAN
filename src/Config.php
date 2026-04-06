@@ -3,6 +3,9 @@
 /**
  * Copyright © Dazoot Software S.R.L. All rights reserved.
  *
+ * @author Newsman by Dazoot <support@newsman.com>
+ * @copyright Copyright © Dazoot Software S.R.L. All rights reserved.
+ *
  * @website https://www.newsman.ro/
  *
  * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
@@ -215,16 +218,10 @@ class Config
 
     /**
      * Check if the Newsman module is enabled in PrestaShop's Module Manager for a given shop.
-     * Uses Module::isEnabled() for the current context shop, or a direct DB query for other shops.
      */
     public function isModuleEnabledForShop(?ShopConstraint $shopConstraint = null): bool
     {
         $shopId = $this->resolveShopId($shopConstraint);
-        $currentShopId = (int) \Context::getContext()->shop->id;
-
-        if ($shopId === $currentShopId) {
-            return \Module::isEnabled('newsman');
-        }
 
         return $this->getModuleShopStatusMap()[$shopId] ?? false;
     }
@@ -268,7 +265,26 @@ class Config
             return $shopConstraint->getShopId()->getValue();
         }
 
-        return (int) \Context::getContext()->shop->id;
+        return self::getEffectiveShopId();
+    }
+
+    /**
+     * Get the current shop ID, falling back to the default shop when in "All shops" context.
+     *
+     * Shop::getContextShopID() returns null in "All shops" admin context,
+     * whereas Context::getContext()->shop->id always returns a valid shop ID.
+     * This helper replicates that behavior without using Context::getContext().
+     */
+    public static function getEffectiveShopId(): int
+    {
+        $shopId = (int) \Shop::getContextShopID();
+        if ($shopId > 0) {
+            return $shopId;
+        }
+
+        $defaultShopId = (int) \Configuration::get('PS_SHOP_DEFAULT');
+
+        return $defaultShopId > 0 ? $defaultShopId : 1;
     }
 
     public function hasApiAccess(?ShopConstraint $shopConstraint = null): bool

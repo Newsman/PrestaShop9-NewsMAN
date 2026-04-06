@@ -3,6 +3,9 @@
 /**
  * Copyright © Dazoot Software S.R.L. All rights reserved.
  *
+ * @author Newsman by Dazoot <support@newsman.com>
+ * @copyright Copyright © Dazoot Software S.R.L. All rights reserved.
+ *
  * @website https://www.newsman.ro/
  *
  * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
@@ -48,10 +51,10 @@ class Renderer
      * Render the main tracking script (nzm_config + remarketing JS + settings).
      * Called from hookDisplayAfterBodyOpeningTag.
      */
-    public function renderTrackingScript(): string
+    public function renderTrackingScript(\Context $context): string
     {
-        $context = \Context::getContext();
-        $shopConstraint = Config::shopConstraint((int) $context->shop->id ?: null);
+        $shopId = (int) ($context->shop->id ?? \Shop::getContextShopID());
+        $shopConstraint = Config::shopConstraint($shopId ?: null);
 
         if (!$this->config->isRemarketingActive($shopConstraint)) {
             return '';
@@ -82,9 +85,8 @@ class Renderer
      * Render cart tracking + customer identify + page-specific JS.
      * Called from hookDisplayBeforeBodyClosingTag.
      */
-    public function renderBodyClosingTag(): string
+    public function renderBodyClosingTag(\Context $context): string
     {
-        $context = \Context::getContext();
         $shopConstraint = Config::shopConstraint((int) $context->shop->id ?: null);
 
         if (!$this->config->isRemarketingActive($shopConstraint)) {

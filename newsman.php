@@ -3,6 +3,9 @@
 /**
  * Copyright © Dazoot Software S.R.L. All rights reserved.
  *
+ * @author Newsman by Dazoot <support@newsman.com>
+ * @copyright Copyright © Dazoot Software S.R.L. All rights reserved.
+ *
  * @website https://www.newsman.ro/
  *
  * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
@@ -208,7 +211,9 @@ class Newsman extends Module
             $tab->module = $this->name;
             $tab->active = true;
 
-            $parentId = Tab::getIdFromClassName($controller['parent_class_name']);
+            $parentId = (int) Db::getInstance()->getValue(
+                'SELECT `id_tab` FROM `' . _DB_PREFIX_ . 'tab` WHERE `class_name` = \'' . pSQL($controller['parent_class_name']) . '\''
+            );
             $tab->id_parent = $parentId ?: -1;
 
             $languages = Language::getLanguages(false);
@@ -232,7 +237,9 @@ class Newsman extends Module
     protected function uninstallTab(): bool
     {
         foreach (array_reverse(static::MODULE_ADMIN_CONTROLLERS) as $controller) {
-            $tabId = Tab::getIdFromClassName($controller['class_name']);
+            $tabId = (int) Db::getInstance()->getValue(
+                'SELECT `id_tab` FROM `' . _DB_PREFIX_ . 'tab` WHERE `class_name` = \'' . pSQL($controller['class_name']) . '\''
+            );
             if ($tabId) {
                 $tab = new Tab($tabId);
                 if (!$tab->delete()) {
@@ -273,7 +280,7 @@ class Newsman extends Module
         try {
             $renderer = $this->get(RemarketingRenderer::class);
 
-            return $renderer->renderTrackingScript();
+            return $renderer->renderTrackingScript($this->context);
         } catch (Exception $e) {
             $logger = $this->get(Logger::class);
             $logger->logException($e);
@@ -287,7 +294,7 @@ class Newsman extends Module
         try {
             $renderer = $this->get(RemarketingRenderer::class);
 
-            return $renderer->renderBodyClosingTag();
+            return $renderer->renderBodyClosingTag($this->context);
         } catch (Exception $e) {
             $logger = $this->get(Logger::class);
             $logger->logException($e);

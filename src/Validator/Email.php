@@ -3,6 +3,9 @@
 /**
  * Copyright © Dazoot Software S.R.L. All rights reserved.
  *
+ * @author Newsman by Dazoot <support@newsman.com>
+ * @copyright Copyright © Dazoot Software S.R.L. All rights reserved.
+ *
  * @website https://www.newsman.ro/
  *
  * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
@@ -20,8 +23,8 @@ class Email
 
         [$local, $domain] = explode('@', $email, 2);
 
-        if (function_exists('idn_to_ascii')) {
-            $asciiDomain = idn_to_ascii($domain, IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46);
+        if (function_exists('idn_to_ascii') && defined('INTL_IDNA_VARIANT_UTS46')) {
+            $asciiDomain = idn_to_ascii($domain, 0, INTL_IDNA_VARIANT_UTS46);
             if (false === $asciiDomain) {
                 return false;
             }

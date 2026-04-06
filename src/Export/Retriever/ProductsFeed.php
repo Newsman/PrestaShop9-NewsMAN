@@ -3,6 +3,9 @@
 /**
  * Copyright © Dazoot Software S.R.L. All rights reserved.
  *
+ * @author Newsman by Dazoot <support@newsman.com>
+ * @copyright Copyright © Dazoot Software S.R.L. All rights reserved.
+ *
  * @website https://www.newsman.ro/
  *
  * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
@@ -211,7 +214,7 @@ class ProductsFeed extends AbstractRetriever implements RetrieverInterface
     {
         $shopId = $shopIds[0] ?? null;
         $price = (float) $product['price'];
-        $link = \Context::getContext()->link;
+        $link = new \Link();
 
         $row = [
             'id' => $product['product_id'],
@@ -249,7 +252,7 @@ class ProductsFeed extends AbstractRetriever implements RetrieverInterface
         if (!empty($product['id_image'])) {
             $row['image_url'] = $link->getImageLink(
                 $product['link_rewrite'],
-                (int) $product['id_image'],
+                (string) $product['id_image'],
                 'large_default'
             );
         } else {
