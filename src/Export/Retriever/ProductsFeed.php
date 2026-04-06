@@ -13,8 +13,6 @@
 
 namespace PrestaShop\Module\Newsman\Export\Retriever;
 
-use PrestaShop\Module\Newsman\Config;
-
 class ProductsFeed extends AbstractRetriever implements RetrieverInterface
 {
     public const DEFAULT_PAGE_SIZE = 1000;
