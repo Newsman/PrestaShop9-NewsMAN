@@ -155,7 +155,7 @@ class Renderer
      * Render purchase tracking JS.
      * Called from hookDisplayOrderConfirmation.
      */
-    public function renderPurchaseTracking(\Order $order, ?ShopConstraint $shopConstraint = null): string
+    public function renderPurchaseTracking(\Order $order, ShopConstraint $shopConstraint = null): string
     {
         if (!$this->config->isRemarketingActive($shopConstraint)) {
             return '';

@@ -32,7 +32,7 @@ class Authenticator
     /**
      * @throws \OutOfBoundsException
      */
-    public function authenticate(string $apiKey, ?ShopConstraint $shopConstraint = null): bool
+    public function authenticate(string $apiKey, ShopConstraint $shopConstraint = null): bool
     {
         if (empty($apiKey)) {
             throw new \OutOfBoundsException('Empty API key provided.');

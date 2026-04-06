@@ -40,7 +40,7 @@ class Processor
      *
      * @throws \OutOfBoundsException
      */
-    public function process(string $code, ?int $shopId = null, array $data = []): array
+    public function process(string $code, int $shopId = null, array $data = []): array
     {
         $tmpData = $data;
         unset($tmpData[Authenticator::API_KEY_PARAM]);

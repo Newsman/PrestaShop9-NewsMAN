@@ -35,7 +35,7 @@ class Purchase
     /**
      * Generate purchase tracking JS.
      */
-    public function getHtml(\Order $order, ?ShopConstraint $shopConstraint = null): string
+    public function getHtml(\Order $order, ShopConstraint $shopConstraint = null): string
     {
         if (!\Validate::isLoadedObject($order)) {
             return $this->pageView->getHtml();

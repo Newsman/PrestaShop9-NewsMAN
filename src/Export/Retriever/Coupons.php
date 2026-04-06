@@ -107,7 +107,7 @@ class Coupons extends AbstractRetriever implements RetrieverInterface
         ?string $expireDate,
         float $value,
         float $minAmount,
-        ?int $shopId = null,
+        int $shopId = null,
         array $shopIds = [],
     ): string {
         $fullCouponCode = $this->generateCouponCode($prefix);

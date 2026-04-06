@@ -333,7 +333,7 @@ class ProductsFeed extends AbstractRetriever implements RetrieverInterface
         return $productCategories;
     }
 
-    protected function loadCategories(int $langId, ?int $shopId = null): void
+    protected function loadCategories(int $langId, int $shopId = null): void
     {
         $key = $shopId ?? 0;
         if (isset($this->categories[$key])) {
@@ -361,7 +361,7 @@ class ProductsFeed extends AbstractRetriever implements RetrieverInterface
     /**
      * @return array<array<string, mixed>>
      */
-    public function getCategoryPath(int $categoryId, ?int $shopId = null): array
+    public function getCategoryPath(int $categoryId, int $shopId = null): array
     {
         $key = $shopId ?? 0;
         $path = [];

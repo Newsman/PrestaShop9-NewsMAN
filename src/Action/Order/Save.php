@@ -48,7 +48,7 @@ class Save
     /**
      * Save order to Newsman remarketing API.
      */
-    public function execute(int $orderId, bool $isNew = false, ?ShopConstraint $shopConstraint = null): void
+    public function execute(int $orderId, bool $isNew = false, ShopConstraint $shopConstraint = null): void
     {
         if (!$this->config->isEnabled($shopConstraint)) {
             return;
@@ -170,7 +170,7 @@ class Save
         return is_array($rows) ? $rows : [];
     }
 
-    protected function getStoreDomain(?ShopConstraint $shopConstraint = null): string
+    protected function getStoreDomain(ShopConstraint $shopConstraint = null): string
     {
         $domain = \Tools::getShopDomainSsl(false);
         if (!empty($domain)) {
