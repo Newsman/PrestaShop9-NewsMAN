@@ -5,7 +5,15 @@
 
 The [NewsMAN](https://www.newsmanapp.com) module for PrestaShop 9 facilitates seamless synchronization of your PrestaShop customers and subscribers with Newsman lists and segments. Simplify the connection between your shop and NewsMAN by installing this module and following the setup steps below. This process allows you to effortlessly sync customer and newsletter subscriber data, enable remarketing, and manage your email marketing campaigns.
 
+> [!NOTE]
+> For older PrestaShop versions, use the previous module releases:
+> - **PrestaShop 1.8.x**: [Newsman/PrestaShop8-NewsMAN](https://github.com/Newsman/PrestaShop8-NewsMAN)
+> - **PrestaShop 1.6.x – 1.7.x**: [Newsman/PrestaShop-Newsman](https://github.com/Newsman/PrestaShop-Newsman)
+
 # Installation
+
+> [!WARNING]
+> If you have an older version of the module installed (1.0.0, 1.0.1 — previously named `newsmanapp`), you must **uninstall** it first and then **delete** it from **Admin > Modules > Module Manager** before installing version 9.0.0 or greater. The new module uses a different internal name (`newsman`) and cannot upgrade from the old one directly.
 
 ## Manual installation (download archive and upload):
 1. Download the latest **newsman.zip** archive from [releases](https://github.com/Newsman/PrestaShop9-NewsMAN/releases) (Git tags 9.x.x-autoload, link in the right sidebar here on GitHub). The archive newsman.zip contains the module with the generated `vendor/autoload.php` which is required.
