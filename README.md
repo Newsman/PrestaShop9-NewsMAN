@@ -13,11 +13,11 @@ The [NewsMAN](https://www.newsmanapp.com) module for PrestaShop 9 facilitates se
 # Installation
 
 > [!WARNING]
-> If you have an older version of the module installed (1.0.0, 1.0.1 — previously named `newsmanapp`), you must **uninstall** it first and then **delete** it from **Admin > Modules > Module Manager** before installing version 9.0.0 or greater. The new module uses a different internal name (`newsman`) and cannot upgrade from the old one directly.
+> If you have an older version of the module installed (previously named `newsmanapp` or `newsman`), you must **uninstall** it first and then **delete** it from **Admin > Modules > Module Manager** before installing version 9.0.0 or greater. The new module uses a different internal name (`newsmanv8`) and cannot upgrade from the old one directly.
 
 ## Manual installation (download archive and upload):
-1. Download the latest **newsman.zip** archive from [releases](https://github.com/Newsman/PrestaShop9-NewsMAN/releases) (Git tags 9.x.x-autoload, link in the right sidebar here on GitHub). The archive newsman.zip contains the module with the generated `vendor/autoload.php` which is required.
-2. Go to **Admin > Modules > Module Manager > Upload a module** and upload the **newsman.zip** archive.
+1. Download the latest **newsmanv8.zip** archive from [releases](https://github.com/Newsman/PrestaShop9-NewsMAN/releases) (Git tags 9.x.x-autoload, link in the right sidebar here on GitHub). The archive newsmanv8.zip contains the module with the generated `vendor/autoload.php` which is required.
+2. Go to **Admin > Modules > Module Manager > Upload a module** and upload the **newsmanv8.zip** archive.
 3. After installation, find **Newsman** in the module list and click **Configure**.
 4. At this step you will need to click on the **Connect with Newsman** button and follow the steps to complete the configuration:
    - Authenticate in newsman.app.
@@ -36,8 +36,8 @@ The [NewsMAN](https://www.newsmanapp.com) module for PrestaShop 9 facilitates se
 ## Manual installation (create archive from source):
 1. Download from GitHub repository > top right corner **Code** > Download ZIP. Unarchive the downloaded file.
 2. Go to the downloaded directory and run `composer install --no-dev` to install the dependencies.
-3. Alternatively, use the build script: `./tools/developer/build-release-zip.sh /path/to/modules/newsman php8.2 /usr/local/bin/composer /tmp/newsman.zip`
-4. Upload the resulting **newsman.zip** via **Admin > Modules > Module Manager > Upload a module**.
+3. Alternatively, use the build script: `./tools/developer/build-release-zip.sh /path/to/modules/newsmanv8 php8.2 /usr/local/bin/composer /tmp/newsmanv8.zip`
+4. Upload the resulting **newsmanv8.zip** via **Admin > Modules > Module Manager > Upload a module**.
 
 ## Configuration
 
