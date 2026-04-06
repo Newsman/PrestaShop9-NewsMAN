@@ -48,7 +48,7 @@ class OauthLoginController extends PrestaShopAdminController
     #[AdminSecurity("is_granted('read', request.get('_legacy_controller'))", message: 'Access denied.')]
     public function indexAction(Request $request, Config $config): Response
     {
-        $callbackUrl = $request->getSchemeAndHttpHost() . $this->generateUrl('newsman_oauth_callback');
+        $callbackUrl = $request->getSchemeAndHttpHost() . $this->generateUrl('newsmanv8_oauth_callback');
 
         return $this->render('@Modules/newsmanv8/views/templates/admin/step1_login.html.twig', [
             'oauthUrl' => Config::OAUTH_AUTHORIZE_URL

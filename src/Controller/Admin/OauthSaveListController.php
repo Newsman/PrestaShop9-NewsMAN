@@ -33,7 +33,7 @@ if (!defined('_PS_VERSION_')) {
 
 class OauthSaveListController extends PrestaShopAdminController
 {
-    #[AdminSecurity("is_granted('update', request.get('_legacy_controller'))", message: 'Access denied.', redirectRoute: 'newsman_oauth_step1')]
+    #[AdminSecurity("is_granted('update', request.get('_legacy_controller'))", message: 'Access denied.', redirectRoute: 'newsmanv8_oauth_step1')]
     public function indexAction(
         Request $request,
         ConfigurationAdapter $configuration,
@@ -50,7 +50,7 @@ class OauthSaveListController extends PrestaShopAdminController
         if (empty($userId) || empty($apiKey) || empty($listId)) {
             $this->addFlash('error', 'Missing required fields.');
 
-            return $this->redirectToRoute('newsman_oauth_step1');
+            return $this->redirectToRoute('newsmanv8_oauth_step1');
         }
 
         $configuration->set(Config::KEY_USER_ID, $userId);
@@ -86,7 +86,7 @@ class OauthSaveListController extends PrestaShopAdminController
 
         $this->addFlash('success', 'Connected to Newsman successfully.');
 
-        return $this->redirectToRoute('newsman_configuration');
+        return $this->redirectToRoute('newsmanv8_configuration');
     }
 
     /**

@@ -37,19 +37,19 @@ class OauthCallbackController extends PrestaShopAdminController
         if (!empty($error)) {
             $this->addFlash('error', 'Authorization error: ' . $error);
 
-            return $this->redirectToRoute('newsman_oauth_step1');
+            return $this->redirectToRoute('newsmanv8_oauth_step1');
         }
 
         $code = $request->query->get('code', '');
         if (empty($code)) {
             $this->addFlash('error', 'Missing authorization code.');
 
-            return $this->redirectToRoute('newsman_oauth_step1');
+            return $this->redirectToRoute('newsmanv8_oauth_step1');
         }
 
         $credentials = $this->exchangeOAuthCode($logger, $code);
         if (null === $credentials) {
-            return $this->redirectToRoute('newsman_oauth_step1');
+            return $this->redirectToRoute('newsmanv8_oauth_step1');
         }
 
         $lists = $this->fetchEmailLists($logger, $getListAll, $credentials['user_id'], $credentials['api_key']);
@@ -57,7 +57,7 @@ class OauthCallbackController extends PrestaShopAdminController
         if (empty($lists)) {
             $this->addFlash('error', 'No email lists found in your Newsman account.');
 
-            return $this->redirectToRoute('newsman_oauth_step1');
+            return $this->redirectToRoute('newsmanv8_oauth_step1');
         }
 
         return $this->render('@Modules/newsmanv8/views/templates/admin/step2_list.html.twig', [

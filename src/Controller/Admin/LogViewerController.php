@@ -37,7 +37,7 @@ class LogViewerController extends PrestaShopAdminController
         LogFileReader $logFileReader,
     ): Response {
         if (!$config->hasApiAccess()) {
-            return $this->redirectToRoute('newsman_oauth_step1');
+            return $this->redirectToRoute('newsmanv8_oauth_step1');
         }
 
         $logFileReader->cleanOldLogs();
@@ -91,6 +91,6 @@ class LogViewerController extends PrestaShopAdminController
             }
         }
 
-        return $this->redirectToRoute('newsman_log_viewer');
+        return $this->redirectToRoute('newsmanv8_log_viewer');
     }
 }

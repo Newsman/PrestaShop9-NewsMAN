@@ -47,7 +47,7 @@ class ConfigurationController extends PrestaShopAdminController
         $logFileReader->cleanOldLogs();
 
         if (!$config->hasApiAccess()) {
-            return $this->redirectToRoute('newsman_oauth_step1');
+            return $this->redirectToRoute('newsmanv8_oauth_step1');
         }
 
         $form = $formHandler->getForm();
@@ -62,7 +62,7 @@ class ConfigurationController extends PrestaShopAdminController
                 $this->addFlashErrors($errors);
             }
 
-            return $this->redirectToRoute('newsman_configuration');
+            return $this->redirectToRoute('newsmanv8_configuration');
         }
 
         $listId = $config->getListId();
