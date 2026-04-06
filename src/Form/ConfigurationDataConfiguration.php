@@ -192,7 +192,7 @@ class ConfigurationDataConfiguration extends AbstractMultistoreConfiguration
         string $userId,
         string $apiKey,
         string $listId,
-        ShopConstraint $shopConstraint = null,
+        ?ShopConstraint $shopConstraint = null,
     ): void {
         try {
             $context = (new EmailListContext())
@@ -224,7 +224,7 @@ class ConfigurationDataConfiguration extends AbstractMultistoreConfiguration
     /**
      * Propagate authenticate token and remarketing settings to all shops sharing the same list.
      */
-    protected function propagateToLinkedShops(string $listId, ShopConstraint $shopConstraint = null): void
+    protected function propagateToLinkedShops(string $listId, ?ShopConstraint $shopConstraint = null): void
     {
         try {
             $linkedShopIds = $this->newsmanConfig->getShopIdsByListId($listId);
@@ -259,7 +259,7 @@ class ConfigurationDataConfiguration extends AbstractMultistoreConfiguration
         string $userId,
         string $apiKey,
         string $listId,
-        ShopConstraint $shopConstraint = null,
+        ?ShopConstraint $shopConstraint = null,
     ): void {
         $authenticateToken = (string) $this->configuration->get(Config::KEY_AUTHENTICATE_TOKEN, '', $shopConstraint);
         if (empty($authenticateToken)) {

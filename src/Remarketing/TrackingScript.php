@@ -30,7 +30,7 @@ class TrackingScript
     /**
      * Generate the main tracking script HTML.
      */
-    public function getHtml(ShopConstraint $shopConstraint = null, string $currencyCode = ''): string
+    public function getHtml(?ShopConstraint $shopConstraint = null, string $currencyCode = ''): string
     {
         $scriptJs = $this->config->getRemarketingScriptJs($shopConstraint);
 

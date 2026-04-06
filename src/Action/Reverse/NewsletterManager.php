@@ -28,7 +28,7 @@ class NewsletterManager
     ) {
     }
 
-    public function subscribe(string $email, int $shopId = null): bool
+    public function subscribe(string $email, ?int $shopId = null): bool
     {
         $shopFilter = null !== $shopId ? ' AND id_shop = ' . (int) $shopId : '';
 
@@ -77,7 +77,7 @@ class NewsletterManager
         );
     }
 
-    public function unsubscribe(string $email, int $shopId = null): bool
+    public function unsubscribe(string $email, ?int $shopId = null): bool
     {
         $shopFilter = null !== $shopId ? ' AND id_shop = ' . (int) $shopId : '';
 

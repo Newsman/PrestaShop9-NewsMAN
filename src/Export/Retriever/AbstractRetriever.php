@@ -98,7 +98,7 @@ abstract class AbstractRetriever implements RetrieverInterface
      *
      * @return array<string, mixed>
      */
-    public function processListWhereParameters(array $data = [], int $shopId = null): array
+    public function processListWhereParameters(array $data = [], ?int $shopId = null): array
     {
         if (!empty($data['_v1_filter_fields'])) {
             $allowedMapping = $this->getWhereParametersMapping();
@@ -230,7 +230,7 @@ abstract class AbstractRetriever implements RetrieverInterface
         ];
     }
 
-    protected function getDefaultLanguageId(int $shopId = null): int
+    protected function getDefaultLanguageId(?int $shopId = null): int
     {
         $sql = 'SELECT `id_lang` FROM `' . _DB_PREFIX_ . 'lang` WHERE `active` = 1 ORDER BY `id_lang` ASC';
         $result = \Db::getInstance()->getValue($sql);
@@ -238,7 +238,7 @@ abstract class AbstractRetriever implements RetrieverInterface
         return $result ? (int) $result : 1;
     }
 
-    protected function getShopUrl(int $shopId = null): string
+    protected function getShopUrl(?int $shopId = null): string
     {
         $currentShopId = $this->config->getEffectiveShopId();
         if ($shopId !== null && $currentShopId !== $shopId) {

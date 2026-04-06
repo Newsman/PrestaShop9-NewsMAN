@@ -48,7 +48,7 @@ class Status
     /**
      * Send order status update to Newsman API.
      */
-    public function execute(int $orderId, int $newOrderStateId, ShopConstraint $shopConstraint = null): void
+    public function execute(int $orderId, int $newOrderStateId, ?ShopConstraint $shopConstraint = null): void
     {
         if (!$this->config->isEnabled($shopConstraint)) {
             return;

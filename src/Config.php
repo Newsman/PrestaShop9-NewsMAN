@@ -103,57 +103,57 @@ class Config
         ];
     }
 
-    public function getUserId(ShopConstraint $shopConstraint = null): string
+    public function getUserId(?ShopConstraint $shopConstraint = null): string
     {
         return (string) $this->configuration->get(self::KEY_USER_ID, '', $shopConstraint);
     }
 
-    public function getApiKey(ShopConstraint $shopConstraint = null): string
+    public function getApiKey(?ShopConstraint $shopConstraint = null): string
     {
         return (string) $this->configuration->get(self::KEY_API_KEY, '', $shopConstraint);
     }
 
-    public function getListId(ShopConstraint $shopConstraint = null): string
+    public function getListId(?ShopConstraint $shopConstraint = null): string
     {
         return (string) $this->configuration->get(self::KEY_LIST_ID, '', $shopConstraint);
     }
 
-    public function getSegmentId(ShopConstraint $shopConstraint = null): string
+    public function getSegmentId(?ShopConstraint $shopConstraint = null): string
     {
         return (string) $this->configuration->get(self::KEY_SEGMENT_ID, '', $shopConstraint);
     }
 
-    public function getAuthenticateToken(ShopConstraint $shopConstraint = null): string
+    public function getAuthenticateToken(?ShopConstraint $shopConstraint = null): string
     {
         return (string) $this->configuration->get(self::KEY_AUTHENTICATE_TOKEN, '', $shopConstraint);
     }
 
-    public function isDoubleOptin(ShopConstraint $shopConstraint = null): bool
+    public function isDoubleOptin(?ShopConstraint $shopConstraint = null): bool
     {
         return (bool) $this->configuration->get(self::KEY_DOUBLE_OPTIN, false, $shopConstraint);
     }
 
-    public function isSendUserIp(ShopConstraint $shopConstraint = null): bool
+    public function isSendUserIp(?ShopConstraint $shopConstraint = null): bool
     {
         return (bool) $this->configuration->get(self::KEY_SEND_USER_IP, false, $shopConstraint);
     }
 
-    public function getServerIp(ShopConstraint $shopConstraint = null): string
+    public function getServerIp(?ShopConstraint $shopConstraint = null): string
     {
         return (string) $this->configuration->get(self::KEY_SERVER_IP, '', $shopConstraint);
     }
 
-    public function getExportAuthHeaderName(ShopConstraint $shopConstraint = null): string
+    public function getExportAuthHeaderName(?ShopConstraint $shopConstraint = null): string
     {
         return (string) $this->configuration->get(self::KEY_EXPORT_AUTH_HEADER_NAME, '', $shopConstraint);
     }
 
-    public function getExportAuthHeaderKey(ShopConstraint $shopConstraint = null): string
+    public function getExportAuthHeaderKey(?ShopConstraint $shopConstraint = null): string
     {
         return (string) $this->configuration->get(self::KEY_EXPORT_AUTH_HEADER_KEY, '', $shopConstraint);
     }
 
-    public function isRemarketingActive(ShopConstraint $shopConstraint = null): bool
+    public function isRemarketingActive(?ShopConstraint $shopConstraint = null): bool
     {
         if (!$this->isEnabled($shopConstraint)) {
             return false;
@@ -163,58 +163,58 @@ class Config
             && !empty($this->getRemarketingId($shopConstraint));
     }
 
-    public function getRemarketingId(ShopConstraint $shopConstraint = null): string
+    public function getRemarketingId(?ShopConstraint $shopConstraint = null): string
     {
         return (string) $this->configuration->get(self::KEY_REMARKETING_ID, '', $shopConstraint);
     }
 
-    public function isRemarketingAnonymizeIp(ShopConstraint $shopConstraint = null): bool
+    public function isRemarketingAnonymizeIp(?ShopConstraint $shopConstraint = null): bool
     {
         return (bool) $this->configuration->get(self::KEY_REMARKETING_ANONYMIZE_IP, false, $shopConstraint);
     }
 
-    public function isRemarketingSendTelephone(ShopConstraint $shopConstraint = null): bool
+    public function isRemarketingSendTelephone(?ShopConstraint $shopConstraint = null): bool
     {
         return (bool) $this->configuration->get(self::KEY_REMARKETING_SEND_TELEPHONE, false, $shopConstraint);
     }
 
-    public function getRemarketingScriptJs(ShopConstraint $shopConstraint = null): string
+    public function getRemarketingScriptJs(?ShopConstraint $shopConstraint = null): string
     {
         return (string) $this->configuration->get(self::KEY_REMARKETING_SCRIPT_JS, '', $shopConstraint);
     }
 
-    public function getLogSeverity(ShopConstraint $shopConstraint = null): int
+    public function getLogSeverity(?ShopConstraint $shopConstraint = null): int
     {
         $value = $this->configuration->get(self::KEY_LOG_SEVERITY, null, $shopConstraint);
 
         return $value !== false && $value !== null ? (int) $value : self::LOG_NONE;
     }
 
-    public function getLogCleanDays(ShopConstraint $shopConstraint = null): int
+    public function getLogCleanDays(?ShopConstraint $shopConstraint = null): int
     {
         $value = $this->configuration->get(self::KEY_LOG_CLEAN_DAYS, null, $shopConstraint);
 
         return $value !== false && $value !== null ? (int) $value : self::DEFAULT_LOG_CLEAN_DAYS;
     }
 
-    public function getApiTimeout(ShopConstraint $shopConstraint = null): int
+    public function getApiTimeout(?ShopConstraint $shopConstraint = null): int
     {
         $value = $this->configuration->get(self::KEY_API_TIMEOUT, null, $shopConstraint);
 
         return $value !== false && $value !== null && (int) $value >= 5 ? (int) $value : self::DEFAULT_API_TIMEOUT;
     }
 
-    public function isDevActiveUserIp(ShopConstraint $shopConstraint = null): bool
+    public function isDevActiveUserIp(?ShopConstraint $shopConstraint = null): bool
     {
         return (bool) $this->configuration->get(self::KEY_DEV_ACTIVE_USER_IP, false, $shopConstraint);
     }
 
-    public function getDevUserIp(ShopConstraint $shopConstraint = null): string
+    public function getDevUserIp(?ShopConstraint $shopConstraint = null): string
     {
         return (string) $this->configuration->get(self::KEY_DEV_USER_IP, '', $shopConstraint);
     }
 
-    public function isActive(ShopConstraint $shopConstraint = null): bool
+    public function isActive(?ShopConstraint $shopConstraint = null): bool
     {
         return (bool) $this->configuration->get(self::KEY_ACTIVE, true, $shopConstraint)
             && $this->isModuleEnabledForShop($shopConstraint);
@@ -223,7 +223,7 @@ class Config
     /**
      * Check if the Newsman module is enabled in PrestaShop's Module Manager for a given shop.
      */
-    public function isModuleEnabledForShop(ShopConstraint $shopConstraint = null): bool
+    public function isModuleEnabledForShop(?ShopConstraint $shopConstraint = null): bool
     {
         $shopId = $this->resolveShopId($shopConstraint);
 
@@ -290,12 +290,12 @@ class Config
         return $defaultShopId > 0 ? $defaultShopId : 1;
     }
 
-    public function hasApiAccess(ShopConstraint $shopConstraint = null): bool
+    public function hasApiAccess(?ShopConstraint $shopConstraint = null): bool
     {
         return !empty($this->getUserId($shopConstraint)) && !empty($this->getApiKey($shopConstraint));
     }
 
-    public function isEnabled(ShopConstraint $shopConstraint = null): bool
+    public function isEnabled(?ShopConstraint $shopConstraint = null): bool
     {
         if (!$this->isEnabledWithApiOnly($shopConstraint)) {
             return false;
@@ -308,7 +308,7 @@ class Config
         return true;
     }
 
-    public function isEnabledWithApiOnly(ShopConstraint $shopConstraint = null): bool
+    public function isEnabledWithApiOnly(?ShopConstraint $shopConstraint = null): bool
     {
         if (!$this->isActive($shopConstraint)) {
             return false;

@@ -56,7 +56,7 @@ class Email
         $this->ipAddress = $ipAddress;
     }
 
-    public function isAllow(ShopConstraint $shopConstraint = null): bool
+    public function isAllow(?ShopConstraint $shopConstraint = null): bool
     {
         return $this->config->isEnabled($shopConstraint);
     }
@@ -90,7 +90,7 @@ class Email
         string $lastname,
         array $properties = [],
         array $options = [],
-        ShopConstraint $shopConstraint = null,
+        ?ShopConstraint $shopConstraint = null,
     ): void {
         if (empty($email) || !$this->isAllow($shopConstraint)) {
             return;
@@ -113,7 +113,7 @@ class Email
         string $lastname,
         array $properties = [],
         array $options = [],
-        ShopConstraint $shopConstraint = null,
+        ?ShopConstraint $shopConstraint = null,
     ): void {
         $hookParams = [
             'email' => $email,
@@ -156,7 +156,7 @@ class Email
         string $firstname,
         string $lastname,
         array $properties = [],
-        ShopConstraint $shopConstraint = null,
+        ?ShopConstraint $shopConstraint = null,
     ): void {
         $hookParams = [
             'email' => $email,
@@ -204,7 +204,7 @@ class Email
         }
     }
 
-    public function unsubscribe(string $email, ShopConstraint $shopConstraint = null): void
+    public function unsubscribe(string $email, ?ShopConstraint $shopConstraint = null): void
     {
         if (empty($email) || !$this->isAllow($shopConstraint)) {
             return;
