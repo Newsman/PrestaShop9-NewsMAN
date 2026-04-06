@@ -1,16 +1,13 @@
 <?php
-
 /**
  * Copyright © Dazoot Software S.R.L. All rights reserved.
  *
  * @author Newsman by Dazoot <support@newsman.com>
  * @copyright Copyright © Dazoot Software S.R.L. All rights reserved.
+ * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  *
  * @website https://www.newsman.ro/
- *
- * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  */
-
 declare(strict_types=1);
 
 namespace PrestaShop\Module\Newsman\Form;
@@ -30,6 +27,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 class ConfigurationType extends TranslatorAwareType
 {

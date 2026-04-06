@@ -1,14 +1,12 @@
 <?php
-
 /**
  * Copyright © Dazoot Software S.R.L. All rights reserved.
  *
  * @author Newsman by Dazoot <support@newsman.com>
  * @copyright Copyright © Dazoot Software S.R.L. All rights reserved.
+ * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  *
  * @website https://www.newsman.ro/
- *
- * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  */
 
 namespace PrestaShop\Module\Newsman\Export\Retriever;
@@ -20,12 +18,17 @@ use PrestaShop\Module\Newsman\Service\Configuration\Remarketing\GetSettings;
 use PrestaShop\Module\Newsman\Service\Context\Configuration\EmailList;
 use PrestaShop\PrestaShop\Adapter\Configuration as ConfigurationAdapter;
 
-/**
+/*
  * Handle inbound refresh.remarketing API v1 request.
  *
  * Fetches the remarketing script from the Newsman API via
  * remarketing.getSettings and stores it in configuration.
  */
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 class RefreshRemarketing extends AbstractRetriever
 {
     protected GetSettings $getSettingsService;

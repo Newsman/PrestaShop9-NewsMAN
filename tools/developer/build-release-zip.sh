@@ -77,6 +77,10 @@ echo ""
 # Step 2: Back up vendor/index.php and vendor/.htaccess (before dot-file removal).
 echo "=== Step 2: Backing up vendor security files ==="
 BACKUP_DIR=$(mktemp -d)
+if [ -f "$WORK_DIR/.htaccess" ]; then
+    cp "$WORK_DIR/.htaccess" "$BACKUP_DIR/root-.htaccess"
+    echo "Backed up: .htaccess"
+fi
 for file in vendor/index.php vendor/.htaccess; do
     if [ -f "$WORK_DIR/$file" ]; then
         cp "$WORK_DIR/$file" "$BACKUP_DIR/$(basename "$file")"
@@ -128,6 +132,10 @@ echo ""
 
 # Step 7: Restore vendor/index.php and vendor/.htaccess.
 echo "=== Step 7: Restoring vendor security files ==="
+if [ -f "$BACKUP_DIR/root-.htaccess" ]; then
+    cp "$BACKUP_DIR/root-.htaccess" "$WORK_DIR/.htaccess"
+    echo "Restored: .htaccess"
+fi
 for file in index.php .htaccess; do
     if [ -f "$BACKUP_DIR/$file" ]; then
         cp "$BACKUP_DIR/$file" "$WORK_DIR/vendor/$file"

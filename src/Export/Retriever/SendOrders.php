@@ -1,14 +1,12 @@
 <?php
-
 /**
  * Copyright © Dazoot Software S.R.L. All rights reserved.
  *
  * @author Newsman by Dazoot <support@newsman.com>
  * @copyright Copyright © Dazoot Software S.R.L. All rights reserved.
+ * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  *
  * @website https://www.newsman.ro/
- *
- * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  */
 
 namespace PrestaShop\Module\Newsman\Export\Retriever;
@@ -18,6 +16,10 @@ use PrestaShop\Module\Newsman\Export\Order\StatusMapper;
 use PrestaShop\Module\Newsman\Logger;
 use PrestaShop\Module\Newsman\Service\Context\Remarketing\SaveOrders as SaveOrdersContext;
 use PrestaShop\Module\Newsman\Service\Remarketing\SaveOrders;
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 class SendOrders extends BaseOrders implements RetrieverInterface
 {

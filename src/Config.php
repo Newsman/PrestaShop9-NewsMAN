@@ -1,14 +1,12 @@
 <?php
-
 /**
  * Copyright © Dazoot Software S.R.L. All rights reserved.
  *
  * @author Newsman by Dazoot <support@newsman.com>
  * @copyright Copyright © Dazoot Software S.R.L. All rights reserved.
+ * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  *
  * @website https://www.newsman.ro/
- *
- * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  */
 
 namespace PrestaShop\Module\Newsman;
@@ -16,6 +14,10 @@ namespace PrestaShop\Module\Newsman;
 use PrestaShop\PrestaShop\Adapter\Configuration;
 use PrestaShop\PrestaShop\Adapter\Shop\Context as ShopContext;
 use PrestaShop\PrestaShop\Core\Domain\Shop\ValueObject\ShopConstraint;
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 class Config
 {
@@ -273,9 +275,8 @@ class Config
     /**
      * Get the current shop ID, falling back to the default shop when in "All shops" context.
      *
-     * Shop::getContextShopID() returns null in "All shops" admin context,
-     * whereas Context::getContext()->shop->id always returns a valid shop ID.
-     * This helper replicates that behavior without using Context::getContext().
+     * Shop::getContextShopID() returns null in "All shops" admin context.
+     * This helper falls back to the default shop ID in that case.
      */
     public function getEffectiveShopId(): int
     {

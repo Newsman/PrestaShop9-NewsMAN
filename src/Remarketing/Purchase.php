@@ -1,14 +1,12 @@
 <?php
-
 /**
  * Copyright © Dazoot Software S.R.L. All rights reserved.
  *
  * @author Newsman by Dazoot <support@newsman.com>
  * @copyright Copyright © Dazoot Software S.R.L. All rights reserved.
+ * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  *
  * @website https://www.newsman.ro/
- *
- * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  */
 
 namespace PrestaShop\Module\Newsman\Remarketing;
@@ -16,6 +14,10 @@ namespace PrestaShop\Module\Newsman\Remarketing;
 use PrestaShop\Module\Newsman\Config;
 use PrestaShop\PrestaShop\Adapter\Configuration;
 use PrestaShop\PrestaShop\Core\Domain\Shop\ValueObject\ShopConstraint;
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 class Purchase
 {

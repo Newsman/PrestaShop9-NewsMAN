@@ -1,11 +1,12 @@
 <?php
-
 /**
  * Copyright © Dazoot Software S.R.L. All rights reserved.
  *
- * @website https://www.newsman.ro/
- *
+ * @author Newsman by Dazoot <support@newsman.com>
+ * @copyright Copyright © Dazoot Software S.R.L. All rights reserved.
  * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ *
+ * @website https://www.newsman.ro/
  */
 header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');

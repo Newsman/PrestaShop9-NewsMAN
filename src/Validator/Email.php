@@ -1,17 +1,19 @@
 <?php
-
 /**
  * Copyright © Dazoot Software S.R.L. All rights reserved.
  *
  * @author Newsman by Dazoot <support@newsman.com>
  * @copyright Copyright © Dazoot Software S.R.L. All rights reserved.
+ * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  *
  * @website https://www.newsman.ro/
- *
- * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  */
 
 namespace PrestaShop\Module\Newsman\Validator;
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 class Email
 {
@@ -19,16 +21,6 @@ class Email
     {
         if ('' === $email || false === strpos($email, '@')) {
             return false;
-        }
-
-        [$local, $domain] = explode('@', $email, 2);
-
-        if (function_exists('idn_to_ascii') && defined('INTL_IDNA_VARIANT_UTS46')) {
-            $asciiDomain = idn_to_ascii($domain, 0, INTL_IDNA_VARIANT_UTS46);
-            if (false === $asciiDomain) {
-                return false;
-            }
-            $email = $local . '@' . $asciiDomain;
         }
 
         return false !== filter_var($email, FILTER_VALIDATE_EMAIL);

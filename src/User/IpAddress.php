@@ -1,21 +1,19 @@
 <?php
-
 /**
  * Copyright © Dazoot Software S.R.L. All rights reserved.
  *
  * @author Newsman by Dazoot <support@newsman.com>
  * @copyright Copyright © Dazoot Software S.R.L. All rights reserved.
+ * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  *
  * @website https://www.newsman.ro/
- *
- * @license https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  */
 
 namespace PrestaShop\Module\Newsman\User;
 
 use PrestaShop\Module\Newsman\Config;
 
-/**
+/*
  * Resolves the IP address to send to Newsman API.
  *
  * Resolution chain:
@@ -24,6 +22,11 @@ use PrestaShop\Module\Newsman\Config;
  * 3. Remote client IP (if valid and not localhost)
  * 4. Server/host IP (fallback)
  */
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 class IpAddress implements IpAddressInterface
 {
     public function __construct(
