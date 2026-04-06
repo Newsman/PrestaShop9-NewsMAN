@@ -84,6 +84,22 @@ class StatusMapper
             return 'payment_error';
         }
 
-        return 'cheque';
+        return $this->slugify($orderStateId);
+    }
+
+    protected function slugify(int $orderStateId): string
+    {
+        $orderState = new \OrderState($orderStateId, (int) \Configuration::get('PS_LANG_DEFAULT'));
+        $name = isset($orderState->name) ? (string) $orderState->name : '';
+
+        if (empty($name)) {
+            return 'status_' . $orderStateId;
+        }
+
+        $slug = mb_strtolower($name);
+        $slug = preg_replace('/[^a-z0-9]+/', '_', $slug);
+        $slug = trim($slug, '_');
+
+        return $slug ?: 'status_' . $orderStateId;
     }
 }
