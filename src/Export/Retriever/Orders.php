@@ -9,11 +9,11 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Export\Retriever;
+namespace PrestaShop\Module\Newsmanv8\Export\Retriever;
 
-use PrestaShop\Module\Newsman\Config;
-use PrestaShop\Module\Newsman\Export\Order\StatusMapper;
-use PrestaShop\Module\Newsman\Logger;
+use PrestaShop\Module\Newsmanv8\Config;
+use PrestaShop\Module\Newsmanv8\Export\Order\StatusMapper;
+use PrestaShop\Module\Newsmanv8\Logger;
 
 if (!defined('_PS_VERSION_')) {
     exit;

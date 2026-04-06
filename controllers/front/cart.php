@@ -15,7 +15,7 @@ if (!defined('_PS_VERSION_')) {
 /**
  * @see ModuleFrontControllerCore
  */
-class NewsmanCartModuleFrontController extends ModuleFrontController
+class Newsmanv8CartModuleFrontController extends ModuleFrontController
 {
     public $ssl = true;
 

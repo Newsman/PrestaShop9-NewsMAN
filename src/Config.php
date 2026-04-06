@@ -9,7 +9,7 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman;
+namespace PrestaShop\Module\Newsmanv8;
 
 use PrestaShop\PrestaShop\Adapter\Configuration;
 use PrestaShop\PrestaShop\Adapter\Shop\Context as ShopContext;
@@ -63,9 +63,9 @@ class Config
     public const DEFAULT_API_TIMEOUT = 30;
     public const DEFAULT_LOG_CLEAN_DAYS = 30;
 
-    public const MODULE_NAME = 'newsman';
+    public const MODULE_NAME = 'newsmanv8';
     public const CONFLICTING_MODULE_NEWSMANAPP = 'newsmanapp';
-    public const CONFLICTING_MODULE_NEWSMANV8 = 'newsmanv8';
+    public const CONFLICTING_MODULE_NEWSMAN = 'newsman';
 
     public function __construct(
         protected Configuration $configuration,
@@ -242,7 +242,7 @@ class Config
         }
 
         $this->moduleShopStatusMap = [];
-        $moduleId = (int) \Module::getModuleIdByName('newsman');
+        $moduleId = (int) \Module::getModuleIdByName('newsmanv8');
         if ($moduleId <= 0) {
             return $this->moduleShopStatusMap;
         }

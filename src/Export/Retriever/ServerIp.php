@@ -9,9 +9,9 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Export\Retriever;
+namespace PrestaShop\Module\Newsmanv8\Export\Retriever;
 
-use PrestaShop\Module\Newsman\Util\ServerIpResolver;
+use PrestaShop\Module\Newsmanv8\Util\ServerIpResolver;
 
 if (!defined('_PS_VERSION_')) {
     exit;
@@ -22,8 +22,8 @@ class ServerIp extends AbstractRetriever implements RetrieverInterface
     protected ServerIpResolver $serverIpResolver;
 
     public function __construct(
-        \PrestaShop\Module\Newsman\Config $config,
-        \PrestaShop\Module\Newsman\Logger $logger,
+        \PrestaShop\Module\Newsmanv8\Config $config,
+        \PrestaShop\Module\Newsmanv8\Logger $logger,
         ServerIpResolver $serverIpResolver,
     ) {
         parent::__construct($config, $logger);

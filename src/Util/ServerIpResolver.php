@@ -9,7 +9,7 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Util;
+namespace PrestaShop\Module\Newsmanv8\Util;
 
 /*
  * Resolves the server's public IP address.

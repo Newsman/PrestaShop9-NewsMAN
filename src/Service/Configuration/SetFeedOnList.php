@@ -9,11 +9,11 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Service\Configuration;
+namespace PrestaShop\Module\Newsmanv8\Service\Configuration;
 
-use PrestaShop\Module\Newsman\Service\AbstractService;
-use PrestaShop\Module\Newsman\Service\Context\AbstractContext;
-use PrestaShop\Module\Newsman\Service\Context\Configuration\SetFeedOnList as SetFeedOnListContext;
+use PrestaShop\Module\Newsmanv8\Service\AbstractService;
+use PrestaShop\Module\Newsmanv8\Service\Context\AbstractContext;
+use PrestaShop\Module\Newsmanv8\Service\Context\Configuration\SetFeedOnList as SetFeedOnListContext;
 
 if (!defined('_PS_VERSION_')) {
     exit;

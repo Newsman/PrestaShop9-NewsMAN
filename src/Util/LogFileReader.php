@@ -10,9 +10,9 @@
  */
 declare(strict_types=1);
 
-namespace PrestaShop\Module\Newsman\Util;
+namespace PrestaShop\Module\Newsmanv8\Util;
 
-use PrestaShop\Module\Newsman\Config;
+use PrestaShop\Module\Newsmanv8\Config;
 
 if (!defined('_PS_VERSION_')) {
     exit;

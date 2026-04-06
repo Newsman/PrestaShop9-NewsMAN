@@ -9,7 +9,7 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Remarketing;
+namespace PrestaShop\Module\Newsmanv8\Remarketing;
 
 if (!defined('_PS_VERSION_')) {
     exit;
@@ -205,7 +205,7 @@ class CartTracking
                 }
                 var _location = pointer.responseURL;
                 if (timeValidate) {
-                    if (_location.indexOf('module/newsman/cart') >= 0) {
+                    if (_location.indexOf('module/newsmanv8/cart') >= 0) {
                         validate = false;
                     } else {
                         if (_location.indexOf(window.location.origin) !== -1) {

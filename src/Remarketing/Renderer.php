@@ -9,9 +9,9 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Remarketing;
+namespace PrestaShop\Module\Newsmanv8\Remarketing;
 
-use PrestaShop\Module\Newsman\Config;
+use PrestaShop\Module\Newsmanv8\Config;
 use PrestaShop\PrestaShop\Core\Domain\Shop\ValueObject\ShopConstraint;
 
 if (!defined('_PS_VERSION_')) {
@@ -192,7 +192,7 @@ class Renderer
     protected function getCartAjaxUrl(\Context $context): string
     {
         return rtrim($context->link->getBaseLink(), '/')
-            . '/index.php?fc=module&module=newsman&controller=cart';
+            . '/index.php?fc=module&module=newsmanv8&controller=cart';
     }
 
     /**

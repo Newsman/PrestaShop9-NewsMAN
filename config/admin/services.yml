@@ -8,49 +8,49 @@ services:
     autoconfigure: true
 
   # Controllers
-  PrestaShop\Module\Newsman\Controller\Admin\ConfigurationController: ~
-  PrestaShop\Module\Newsman\Controller\Admin\OauthLoginController: ~
-  PrestaShop\Module\Newsman\Controller\Admin\OauthCallbackController: ~
-  PrestaShop\Module\Newsman\Controller\Admin\OauthSaveListController: ~
-  PrestaShop\Module\Newsman\Controller\Admin\LogViewerController: ~
+  PrestaShop\Module\Newsmanv8\Controller\Admin\ConfigurationController: ~
+  PrestaShop\Module\Newsmanv8\Controller\Admin\OauthLoginController: ~
+  PrestaShop\Module\Newsmanv8\Controller\Admin\OauthCallbackController: ~
+  PrestaShop\Module\Newsmanv8\Controller\Admin\OauthSaveListController: ~
+  PrestaShop\Module\Newsmanv8\Controller\Admin\LogViewerController: ~
 
   # Event subscribers
-  PrestaShop\Module\Newsman\EventSubscriber\AdminEmailsubscriptionSubscriber:
+  PrestaShop\Module\Newsmanv8\EventSubscriber\AdminEmailsubscriptionSubscriber:
     tags:
       - { name: kernel.event_subscriber }
 
   # Form type (inherits translator + locales from parent)
-  PrestaShop\Module\Newsman\Form\ConfigurationType:
-    class: PrestaShop\Module\Newsman\Form\ConfigurationType
+  PrestaShop\Module\Newsmanv8\Form\ConfigurationType:
+    class: PrestaShop\Module\Newsmanv8\Form\ConfigurationType
     parent: 'form.type.translatable.aware'
     autowire: true
     public: true
     tags: ['form.type']
 
   # Data configuration (extends AbstractMultistoreConfiguration)
-  PrestaShop\Module\Newsman\Form\ConfigurationDataConfiguration:
+  PrestaShop\Module\Newsmanv8\Form\ConfigurationDataConfiguration:
     arguments:
       - '@prestashop.adapter.legacy.configuration'
       - '@PrestaShop\PrestaShop\Adapter\Shop\Context'
       - '@prestashop.adapter.multistore_feature'
-      - '@PrestaShop\Module\Newsman\Logger'
-      - '@PrestaShop\Module\Newsman\Service\Configuration\Integration\SaveListIntegrationSetup'
-      - '@PrestaShop\Module\Newsman\Service\Configuration\Remarketing\GetSettings'
-      - '@PrestaShop\Module\Newsman\Util\ServerIpResolver'
-      - '@PrestaShop\Module\Newsman\Config'
+      - '@PrestaShop\Module\Newsmanv8\Logger'
+      - '@PrestaShop\Module\Newsmanv8\Service\Configuration\Integration\SaveListIntegrationSetup'
+      - '@PrestaShop\Module\Newsmanv8\Service\Configuration\Remarketing\GetSettings'
+      - '@PrestaShop\Module\Newsmanv8\Util\ServerIpResolver'
+      - '@PrestaShop\Module\Newsmanv8\Config'
 
   # Form data provider (wraps DataConfiguration)
-  newsman.form.configuration_data_provider:
-    class: PrestaShop\Module\Newsman\Form\ConfigurationFormDataProvider
+  newsmanv8.form.configuration_data_provider:
+    class: PrestaShop\Module\Newsmanv8\Form\ConfigurationFormDataProvider
     arguments:
-      - '@PrestaShop\Module\Newsman\Form\ConfigurationDataConfiguration'
+      - '@PrestaShop\Module\Newsmanv8\Form\ConfigurationDataConfiguration'
 
   # Form handler (PrestaShop core)
-  newsman.form.configuration_handler:
+  newsmanv8.form.configuration_handler:
     class: 'PrestaShop\PrestaShop\Core\Form\Handler'
     arguments:
       - '@form.factory'
       - '@prestashop.core.hook.dispatcher'
-      - '@newsman.form.configuration_data_provider'
-      - 'PrestaShop\Module\Newsman\Form\ConfigurationType'
-      - 'NewsmanConfiguration'
+      - '@newsmanv8.form.configuration_data_provider'
+      - 'PrestaShop\Module\Newsmanv8\Form\ConfigurationType'
+      - 'Newsmanv8Configuration'

@@ -9,7 +9,7 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Service\Context;
+namespace PrestaShop\Module\Newsmanv8\Service\Context;
 
 if (!defined('_PS_VERSION_')) {
     exit;

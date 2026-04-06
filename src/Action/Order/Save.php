@@ -9,13 +9,13 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Action\Order;
+namespace PrestaShop\Module\Newsmanv8\Action\Order;
 
-use PrestaShop\Module\Newsman\Config;
-use PrestaShop\Module\Newsman\Export\Order\StatusMapper;
-use PrestaShop\Module\Newsman\Logger;
-use PrestaShop\Module\Newsman\Service\Context\Remarketing\SaveOrder as SaveOrderContext;
-use PrestaShop\Module\Newsman\Service\Remarketing\SaveOrder as SaveOrderService;
+use PrestaShop\Module\Newsmanv8\Config;
+use PrestaShop\Module\Newsmanv8\Export\Order\StatusMapper;
+use PrestaShop\Module\Newsmanv8\Logger;
+use PrestaShop\Module\Newsmanv8\Service\Context\Remarketing\SaveOrder as SaveOrderContext;
+use PrestaShop\Module\Newsmanv8\Service\Remarketing\SaveOrder as SaveOrderService;
 use PrestaShop\PrestaShop\Adapter\Configuration;
 use PrestaShop\PrestaShop\Core\Domain\Shop\ValueObject\ShopConstraint;
 

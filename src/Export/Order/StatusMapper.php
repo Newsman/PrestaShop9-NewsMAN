@@ -9,7 +9,7 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Export\Order;
+namespace PrestaShop\Module\Newsmanv8\Export\Order;
 
 use PrestaShop\PrestaShop\Adapter\Configuration;
 

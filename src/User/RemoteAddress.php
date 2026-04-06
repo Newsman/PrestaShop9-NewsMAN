@@ -9,7 +9,7 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\User;
+namespace PrestaShop\Module\Newsmanv8\User;
 
 /*
  * Extracts the remote client IP address from request headers.

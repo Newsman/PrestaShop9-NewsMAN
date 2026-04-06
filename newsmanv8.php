@@ -9,12 +9,12 @@
  * @website https://www.newsman.ro/
  */
 
-use PrestaShop\Module\Newsman\Action\Order\Save as OrderSaveAction;
-use PrestaShop\Module\Newsman\Action\Order\Status as OrderStatusAction;
-use PrestaShop\Module\Newsman\Action\Subscribe\Email as SubscribeEmailAction;
-use PrestaShop\Module\Newsman\Config;
-use PrestaShop\Module\Newsman\Logger;
-use PrestaShop\Module\Newsman\Remarketing\Renderer as RemarketingRenderer;
+use PrestaShop\Module\Newsmanv8\Action\Order\Save as OrderSaveAction;
+use PrestaShop\Module\Newsmanv8\Action\Order\Status as OrderStatusAction;
+use PrestaShop\Module\Newsmanv8\Action\Subscribe\Email as SubscribeEmailAction;
+use PrestaShop\Module\Newsmanv8\Config;
+use PrestaShop\Module\Newsmanv8\Logger;
+use PrestaShop\Module\Newsmanv8\Remarketing\Renderer as RemarketingRenderer;
 
 if (!defined('_PS_VERSION_')) {
     exit;
@@ -28,7 +28,7 @@ if (file_exists($autoloadPath)) {
 /**
  * @see ModuleCore
  */
-class Newsman extends Module
+class Newsmanv8 extends Module
 {
     public const HOOKS = [
         'actionCustomerAccountAdd',
@@ -95,28 +95,28 @@ class Newsman extends Module
 
     public const MODULE_ADMIN_CONTROLLERS = [
         [
-            'class_name' => 'NewsmanConfigurationAdminParentController',
+            'class_name' => 'Newsmanv8ConfigurationAdminParentController',
             'visible' => false,
             'parent_class_name' => 'AdminParentModulesSf',
             'name' => 'Newsman',
         ],
         [
-            'class_name' => 'NewsmanConfigurationAdminController',
+            'class_name' => 'Newsmanv8ConfigurationAdminController',
             'visible' => true,
-            'parent_class_name' => 'NewsmanConfigurationAdminParentController',
+            'parent_class_name' => 'Newsmanv8ConfigurationAdminParentController',
             'name' => 'Settings',
         ],
         [
-            'class_name' => 'NewsmanLogViewerAdminController',
+            'class_name' => 'Newsmanv8LogViewerAdminController',
             'visible' => true,
-            'parent_class_name' => 'NewsmanConfigurationAdminParentController',
+            'parent_class_name' => 'Newsmanv8ConfigurationAdminParentController',
             'name' => 'Logs',
         ],
     ];
 
     public function __construct()
     {
-        $this->name = 'newsman';
+        $this->name = 'newsmanv8';
         $this->tab = 'advertising_marketing';
         $this->version = '9.0.0';
         $this->author = 'Newsman by Dazoot';
@@ -129,11 +129,11 @@ class Newsman extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->trans('Newsman', [], 'Modules.Newsman.Admin');
+        $this->displayName = $this->trans('Newsman', [], 'Modules.Newsmanv8.Admin');
         $this->description = $this->trans(
             'Newsman email marketing and SMS integration for PrestaShop.',
             [],
-            'Modules.Newsman.Admin'
+            'Modules.Newsmanv8.Admin'
         );
 
         $this->controllers = ['api', 'cart'];
@@ -190,7 +190,7 @@ class Newsman extends Module
     public function getContent()
     {
         Tools::redirectAdmin(
-            $this->get('router')->generate('newsman_configuration')
+            $this->get('router')->generate('newsmanv8_configuration')
         );
 
         return '';
@@ -347,7 +347,7 @@ class Newsman extends Module
 
         if ('AdminDashboard' === $controller) {
             try {
-                $this->get(PrestaShop\Module\Newsman\Util\LogFileReader::class)->cleanOldLogs();
+                $this->get(PrestaShop\Module\Newsmanv8\Util\LogFileReader::class)->cleanOldLogs();
             } catch (Exception $e) {
                 // Silently ignore — cleanup is best-effort.
             }

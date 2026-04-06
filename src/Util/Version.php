@@ -9,7 +9,7 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Util;
+namespace PrestaShop\Module\Newsmanv8\Util;
 
 if (!defined('_PS_VERSION_')) {
     exit;
@@ -19,7 +19,7 @@ class Version
 {
     public static function getModuleVersion(): string
     {
-        $module = \Module::getInstanceByName('newsman');
+        $module = \Module::getInstanceByName('newsmanv8');
 
         return $module ? $module->version : '';
     }

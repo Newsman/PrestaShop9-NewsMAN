@@ -9,10 +9,10 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Service;
+namespace PrestaShop\Module\Newsmanv8\Service;
 
-use PrestaShop\Module\Newsman\Service\Context\AbstractContext;
-use PrestaShop\Module\Newsman\Service\Context\InitSubscribeEmail as InitSubscribeEmailContext;
+use PrestaShop\Module\Newsmanv8\Service\Context\AbstractContext;
+use PrestaShop\Module\Newsmanv8\Service\Context\InitSubscribeEmail as InitSubscribeEmailContext;
 
 if (!defined('_PS_VERSION_')) {
     exit;

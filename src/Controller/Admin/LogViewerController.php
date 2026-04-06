@@ -10,11 +10,11 @@
  */
 declare(strict_types=1);
 
-namespace PrestaShop\Module\Newsman\Controller\Admin;
+namespace PrestaShop\Module\Newsmanv8\Controller\Admin;
 
-use PrestaShop\Module\Newsman\Config;
-use PrestaShop\Module\Newsman\Util\LogFileReader;
-use PrestaShop\Module\Newsman\Util\Version;
+use PrestaShop\Module\Newsmanv8\Config;
+use PrestaShop\Module\Newsmanv8\Util\LogFileReader;
+use PrestaShop\Module\Newsmanv8\Util\Version;
 use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
 use PrestaShopBundle\Security\Attribute\AdminSecurity;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -62,7 +62,7 @@ class LogViewerController extends PrestaShopAdminController
             [$logContent, $totalLines] = $logFileReader->readTail($selectedFile, $lines);
         }
 
-        return $this->render('@Modules/newsman/views/templates/admin/log_viewer.html.twig', [
+        return $this->render('@Modules/newsmanv8/views/templates/admin/log_viewer.html.twig', [
             'logFiles' => $logFiles,
             'selectedFile' => $selectedFile,
             'logContent' => $logContent,

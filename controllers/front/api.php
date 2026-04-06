@@ -12,13 +12,13 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-use PrestaShop\Module\Newsman\Export\Router;
-use PrestaShop\Module\Newsman\Webhooks;
+use PrestaShop\Module\Newsmanv8\Export\Router;
+use PrestaShop\Module\Newsmanv8\Webhooks;
 
 /**
  * @see ModuleFrontControllerCore
  */
-class NewsmanApiModuleFrontController extends ModuleFrontController
+class Newsmanv8ApiModuleFrontController extends ModuleFrontController
 {
     public $ssl = true;
 

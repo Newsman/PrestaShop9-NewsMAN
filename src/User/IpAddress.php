@@ -9,9 +9,9 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\User;
+namespace PrestaShop\Module\Newsmanv8\User;
 
-use PrestaShop\Module\Newsman\Config;
+use PrestaShop\Module\Newsmanv8\Config;
 
 /*
  * Resolves the IP address to send to Newsman API.

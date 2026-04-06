@@ -9,11 +9,11 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Service\Segment;
+namespace PrestaShop\Module\Newsmanv8\Service\Segment;
 
-use PrestaShop\Module\Newsman\Service\AbstractService;
-use PrestaShop\Module\Newsman\Service\Context\AbstractContext;
-use PrestaShop\Module\Newsman\Service\Context\Segment\AddSubscriber as AddSubscriberContext;
+use PrestaShop\Module\Newsmanv8\Service\AbstractService;
+use PrestaShop\Module\Newsmanv8\Service\Context\AbstractContext;
+use PrestaShop\Module\Newsmanv8\Service\Context\Segment\AddSubscriber as AddSubscriberContext;
 
 if (!defined('_PS_VERSION_')) {
     exit;

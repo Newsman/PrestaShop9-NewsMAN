@@ -10,7 +10,7 @@
  */
 declare(strict_types=1);
 
-namespace PrestaShop\Module\Newsman\Form;
+namespace PrestaShop\Module\Newsmanv8\Form;
 
 use PrestaShop\PrestaShop\Core\Configuration\DataConfigurationInterface;
 use PrestaShop\PrestaShop\Core\Form\FormDataProviderInterface;

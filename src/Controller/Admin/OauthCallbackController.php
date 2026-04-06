@@ -10,12 +10,12 @@
  */
 declare(strict_types=1);
 
-namespace PrestaShop\Module\Newsman\Controller\Admin;
+namespace PrestaShop\Module\Newsmanv8\Controller\Admin;
 
-use PrestaShop\Module\Newsman\Config;
-use PrestaShop\Module\Newsman\Logger;
-use PrestaShop\Module\Newsman\Service\Configuration\GetListAll;
-use PrestaShop\Module\Newsman\Service\Context\Configuration\User as UserContext;
+use PrestaShop\Module\Newsmanv8\Config;
+use PrestaShop\Module\Newsmanv8\Logger;
+use PrestaShop\Module\Newsmanv8\Service\Configuration\GetListAll;
+use PrestaShop\Module\Newsmanv8\Service\Context\Configuration\User as UserContext;
 use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
 use PrestaShopBundle\Security\Attribute\AdminSecurity;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,7 +60,7 @@ class OauthCallbackController extends PrestaShopAdminController
             return $this->redirectToRoute('newsman_oauth_step1');
         }
 
-        return $this->render('@Modules/newsman/views/templates/admin/step2_list.html.twig', [
+        return $this->render('@Modules/newsmanv8/views/templates/admin/step2_list.html.twig', [
             'lists' => $lists,
             'userId' => $credentials['user_id'],
             'apiKey' => $credentials['api_key'],

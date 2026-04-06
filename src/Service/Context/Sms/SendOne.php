@@ -9,9 +9,9 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Service\Context\Sms;
+namespace PrestaShop\Module\Newsmanv8\Service\Context\Sms;
 
-use PrestaShop\Module\Newsman\Service\Context\Store;
+use PrestaShop\Module\Newsmanv8\Service\Context\Store;
 
 if (!defined('_PS_VERSION_')) {
     exit;

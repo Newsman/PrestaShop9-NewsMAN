@@ -9,11 +9,11 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Service\Remarketing;
+namespace PrestaShop\Module\Newsmanv8\Service\Remarketing;
 
-use PrestaShop\Module\Newsman\Service\AbstractService;
-use PrestaShop\Module\Newsman\Service\Context\AbstractContext;
-use PrestaShop\Module\Newsman\Service\Context\Remarketing\SaveOrders as SaveOrdersContext;
+use PrestaShop\Module\Newsmanv8\Service\AbstractService;
+use PrestaShop\Module\Newsmanv8\Service\Context\AbstractContext;
+use PrestaShop\Module\Newsmanv8\Service\Context\Remarketing\SaveOrders as SaveOrdersContext;
 
 if (!defined('_PS_VERSION_')) {
     exit;

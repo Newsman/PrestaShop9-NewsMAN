@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
-    <name>newsman</name>
+    <name>newsmanv8</name>
     <displayName><![CDATA[Newsman]]></displayName>
     <version><![CDATA[9.0.0]]></version>
     <description><![CDATA[Newsman email marketing and SMS integration for PrestaShop.]]></description>

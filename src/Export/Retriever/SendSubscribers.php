@@ -9,12 +9,12 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Export\Retriever;
+namespace PrestaShop\Module\Newsmanv8\Export\Retriever;
 
-use PrestaShop\Module\Newsman\Config;
-use PrestaShop\Module\Newsman\Logger;
-use PrestaShop\Module\Newsman\Service\Context\ExportCsvSubscribers as ExportCsvContext;
-use PrestaShop\Module\Newsman\Service\ExportCsvSubscribers;
+use PrestaShop\Module\Newsmanv8\Config;
+use PrestaShop\Module\Newsmanv8\Logger;
+use PrestaShop\Module\Newsmanv8\Service\Context\ExportCsvSubscribers as ExportCsvContext;
+use PrestaShop\Module\Newsmanv8\Service\ExportCsvSubscribers;
 
 if (!defined('_PS_VERSION_')) {
     exit;

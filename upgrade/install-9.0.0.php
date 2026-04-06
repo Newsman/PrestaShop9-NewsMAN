@@ -13,7 +13,7 @@ if (!defined('_PS_VERSION_')) {
 }
 
 /**
- * @param Newsman $module
+ * @param Newsmanv8 $module
  *
  * @return bool
  */

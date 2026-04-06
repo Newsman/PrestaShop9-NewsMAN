@@ -9,10 +9,10 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Export;
+namespace PrestaShop\Module\Newsmanv8\Export;
 
-use PrestaShop\Module\Newsman\Config;
-use PrestaShop\Module\Newsman\Export\Retriever\Authenticator;
+use PrestaShop\Module\Newsmanv8\Config;
+use PrestaShop\Module\Newsmanv8\Export\Retriever\Authenticator;
 
 if (!defined('_PS_VERSION_')) {
     exit;

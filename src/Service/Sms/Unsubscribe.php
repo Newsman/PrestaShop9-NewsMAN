@@ -9,11 +9,11 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Service\Sms;
+namespace PrestaShop\Module\Newsmanv8\Service\Sms;
 
-use PrestaShop\Module\Newsman\Service\AbstractService;
-use PrestaShop\Module\Newsman\Service\Context\AbstractContext;
-use PrestaShop\Module\Newsman\Service\Context\Sms\Unsubscribe as UnsubscribeContext;
+use PrestaShop\Module\Newsmanv8\Service\AbstractService;
+use PrestaShop\Module\Newsmanv8\Service\Context\AbstractContext;
+use PrestaShop\Module\Newsmanv8\Service\Context\Sms\Unsubscribe as UnsubscribeContext;
 
 if (!defined('_PS_VERSION_')) {
     exit;

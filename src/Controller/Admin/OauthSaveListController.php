@@ -10,16 +10,16 @@
  */
 declare(strict_types=1);
 
-namespace PrestaShop\Module\Newsman\Controller\Admin;
+namespace PrestaShop\Module\Newsmanv8\Controller\Admin;
 
-use PrestaShop\Module\Newsman\Config;
-use PrestaShop\Module\Newsman\Logger;
-use PrestaShop\Module\Newsman\Service\Configuration\Integration\SaveListIntegrationSetup;
-use PrestaShop\Module\Newsman\Service\Configuration\Remarketing\GetSettings as RemarketingGetSettings;
-use PrestaShop\Module\Newsman\Service\Context\Configuration\EmailList as EmailListContext;
-use PrestaShop\Module\Newsman\Service\Context\Configuration\SaveListIntegrationSetup as SaveListIntegrationSetupContext;
-use PrestaShop\Module\Newsman\Util\ServerIpResolver;
-use PrestaShop\Module\Newsman\Util\Version;
+use PrestaShop\Module\Newsmanv8\Config;
+use PrestaShop\Module\Newsmanv8\Logger;
+use PrestaShop\Module\Newsmanv8\Service\Configuration\Integration\SaveListIntegrationSetup;
+use PrestaShop\Module\Newsmanv8\Service\Configuration\Remarketing\GetSettings as RemarketingGetSettings;
+use PrestaShop\Module\Newsmanv8\Service\Context\Configuration\EmailList as EmailListContext;
+use PrestaShop\Module\Newsmanv8\Service\Context\Configuration\SaveListIntegrationSetup as SaveListIntegrationSetupContext;
+use PrestaShop\Module\Newsmanv8\Util\ServerIpResolver;
+use PrestaShop\Module\Newsmanv8\Util\Version;
 use PrestaShop\PrestaShop\Adapter\Configuration as ConfigurationAdapter;
 use PrestaShop\PrestaShop\Core\Domain\Shop\ValueObject\ShopConstraint;
 use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
@@ -172,7 +172,7 @@ class OauthSaveListController extends PrestaShopAdminController
     ): void {
         try {
             $shopUrl = (new \Shop($newsmanConfig->getEffectiveShopId()))->getBaseURL(true);
-            $apiUrl = $shopUrl . 'index.php?fc=module&module=newsman&controller=api';
+            $apiUrl = $shopUrl . 'index.php?fc=module&module=newsmanv8&controller=api';
             $serverIp = $serverIpResolver->resolve();
 
             $context = (new SaveListIntegrationSetupContext())

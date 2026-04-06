@@ -9,10 +9,10 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\User;
+namespace PrestaShop\Module\Newsmanv8\User;
 
-use PrestaShop\Module\Newsman\Config;
-use PrestaShop\Module\Newsman\Util\ServerIpResolver;
+use PrestaShop\Module\Newsmanv8\Config;
+use PrestaShop\Module\Newsmanv8\Util\ServerIpResolver;
 use PrestaShop\PrestaShop\Adapter\Configuration;
 
 /*

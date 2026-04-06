@@ -9,19 +9,19 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Action\Subscribe;
+namespace PrestaShop\Module\Newsmanv8\Action\Subscribe;
 
-use PrestaShop\Module\Newsman\Config;
-use PrestaShop\Module\Newsman\Logger;
-use PrestaShop\Module\Newsman\Service\Context\InitSubscribeEmail as InitSubscribeContext;
-use PrestaShop\Module\Newsman\Service\Context\Segment\AddSubscriber as AddSubscriberContext;
-use PrestaShop\Module\Newsman\Service\Context\SubscribeEmail as SubscribeContext;
-use PrestaShop\Module\Newsman\Service\Context\UnsubscribeEmail as UnsubscribeContext;
-use PrestaShop\Module\Newsman\Service\InitSubscribeEmail;
-use PrestaShop\Module\Newsman\Service\Segment\AddSubscriber;
-use PrestaShop\Module\Newsman\Service\SubscribeEmail;
-use PrestaShop\Module\Newsman\Service\UnsubscribeEmail;
-use PrestaShop\Module\Newsman\User\IpAddress;
+use PrestaShop\Module\Newsmanv8\Config;
+use PrestaShop\Module\Newsmanv8\Logger;
+use PrestaShop\Module\Newsmanv8\Service\Context\InitSubscribeEmail as InitSubscribeContext;
+use PrestaShop\Module\Newsmanv8\Service\Context\Segment\AddSubscriber as AddSubscriberContext;
+use PrestaShop\Module\Newsmanv8\Service\Context\SubscribeEmail as SubscribeContext;
+use PrestaShop\Module\Newsmanv8\Service\Context\UnsubscribeEmail as UnsubscribeContext;
+use PrestaShop\Module\Newsmanv8\Service\InitSubscribeEmail;
+use PrestaShop\Module\Newsmanv8\Service\Segment\AddSubscriber;
+use PrestaShop\Module\Newsmanv8\Service\SubscribeEmail;
+use PrestaShop\Module\Newsmanv8\Service\UnsubscribeEmail;
+use PrestaShop\Module\Newsmanv8\User\IpAddress;
 use PrestaShop\PrestaShop\Core\Domain\Shop\ValueObject\ShopConstraint;
 
 if (!defined('_PS_VERSION_')) {

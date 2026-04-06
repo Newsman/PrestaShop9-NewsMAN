@@ -9,9 +9,9 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Remarketing;
+namespace PrestaShop\Module\Newsmanv8\Remarketing;
 
-use PrestaShop\Module\Newsman\Config;
+use PrestaShop\Module\Newsmanv8\Config;
 use PrestaShop\PrestaShop\Adapter\Configuration;
 use PrestaShop\PrestaShop\Core\Domain\Shop\ValueObject\ShopConstraint;
 

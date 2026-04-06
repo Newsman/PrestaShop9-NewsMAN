@@ -1,43 +1,43 @@
-newsman_configuration:
-  path: newsman/configuration
+newsmanv8_configuration:
+  path: newsmanv8/configuration
   methods: [GET, POST, PATCH]
   defaults:
-    _controller: PrestaShop\Module\Newsman\Controller\Admin\ConfigurationController::indexAction
-    _legacy_controller: 'NewsmanConfigurationAdminController'
-    _legacy_link: 'NewsmanConfigurationAdminController'
+    _controller: PrestaShop\Module\Newsmanv8\Controller\Admin\ConfigurationController::indexAction
+    _legacy_controller: 'Newsmanv8ConfigurationAdminController'
+    _legacy_link: 'Newsmanv8ConfigurationAdminController'
 
-newsman_oauth_step1:
-  path: newsman/oauth/step1
+newsmanv8_oauth_step1:
+  path: newsmanv8/oauth/step1
   methods: [GET]
   defaults:
-    _controller: PrestaShop\Module\Newsman\Controller\Admin\OauthLoginController::indexAction
-    _legacy_controller: 'NewsmanConfigurationAdminController'
+    _controller: PrestaShop\Module\Newsmanv8\Controller\Admin\OauthLoginController::indexAction
+    _legacy_controller: 'Newsmanv8ConfigurationAdminController'
 
-newsman_oauth_callback:
-  path: newsman/oauth/callback
+newsmanv8_oauth_callback:
+  path: newsmanv8/oauth/callback
   methods: [GET]
   defaults:
-    _controller: PrestaShop\Module\Newsman\Controller\Admin\OauthCallbackController::indexAction
-    _legacy_controller: 'NewsmanConfigurationAdminController'
+    _controller: PrestaShop\Module\Newsmanv8\Controller\Admin\OauthCallbackController::indexAction
+    _legacy_controller: 'Newsmanv8ConfigurationAdminController'
 
-newsman_log_viewer:
-  path: newsman/logs
+newsmanv8_log_viewer:
+  path: newsmanv8/logs
   methods: [GET]
   defaults:
-    _controller: PrestaShop\Module\Newsman\Controller\Admin\LogViewerController::indexAction
-    _legacy_controller: 'NewsmanLogViewerAdminController'
-    _legacy_link: 'NewsmanLogViewerAdminController'
+    _controller: PrestaShop\Module\Newsmanv8\Controller\Admin\LogViewerController::indexAction
+    _legacy_controller: 'Newsmanv8LogViewerAdminController'
+    _legacy_link: 'Newsmanv8LogViewerAdminController'
 
-newsman_log_delete:
-  path: newsman/logs/delete
+newsmanv8_log_delete:
+  path: newsmanv8/logs/delete
   methods: [POST]
   defaults:
-    _controller: PrestaShop\Module\Newsman\Controller\Admin\LogViewerController::deleteAction
-    _legacy_controller: 'NewsmanLogViewerAdminController'
+    _controller: PrestaShop\Module\Newsmanv8\Controller\Admin\LogViewerController::deleteAction
+    _legacy_controller: 'Newsmanv8LogViewerAdminController'
 
-newsman_oauth_save_list:
-  path: newsman/oauth/save-list
+newsmanv8_oauth_save_list:
+  path: newsmanv8/oauth/save-list
   methods: [POST]
   defaults:
-    _controller: PrestaShop\Module\Newsman\Controller\Admin\OauthSaveListController::indexAction
-    _legacy_controller: 'NewsmanConfigurationAdminController'
+    _controller: PrestaShop\Module\Newsmanv8\Controller\Admin\OauthSaveListController::indexAction
+    _legacy_controller: 'Newsmanv8ConfigurationAdminController'

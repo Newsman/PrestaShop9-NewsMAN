@@ -9,16 +9,16 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Service;
+namespace PrestaShop\Module\Newsmanv8\Service;
 
-use PrestaShop\Module\Newsman\Api\Client;
-use PrestaShop\Module\Newsman\Api\ClientInterface;
-use PrestaShop\Module\Newsman\Api\Context as ApiContext;
-use PrestaShop\Module\Newsman\Api\ContextInterface;
-use PrestaShop\Module\Newsman\Config;
-use PrestaShop\Module\Newsman\Logger;
-use PrestaShop\Module\Newsman\Service\Context\AbstractContext;
-use PrestaShop\Module\Newsman\Validator\Email as EmailValidator;
+use PrestaShop\Module\Newsmanv8\Api\Client;
+use PrestaShop\Module\Newsmanv8\Api\ClientInterface;
+use PrestaShop\Module\Newsmanv8\Api\Context as ApiContext;
+use PrestaShop\Module\Newsmanv8\Api\ContextInterface;
+use PrestaShop\Module\Newsmanv8\Config;
+use PrestaShop\Module\Newsmanv8\Logger;
+use PrestaShop\Module\Newsmanv8\Service\Context\AbstractContext;
+use PrestaShop\Module\Newsmanv8\Validator\Email as EmailValidator;
 use PrestaShop\PrestaShop\Core\Domain\Shop\ValueObject\ShopConstraint;
 
 if (!defined('_PS_VERSION_')) {

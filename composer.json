@@ -1,5 +1,5 @@
 {
-    "name": "newsman/prestashop",
+    "name": "newsman/prestashop9",
     "description": "Newsman email marketing and SMS integration for PrestaShop",
     "license": "AFL-3.0",
     "type": "prestashop-module",
@@ -22,10 +22,10 @@
     },
     "autoload": {
         "psr-4": {
-            "PrestaShop\\Module\\Newsman\\": "src/"
+            "PrestaShop\\Module\\Newsmanv8\\": "src/"
         },
         "classmap": [
-            "newsman.php"
+            "newsmanv8.php"
         ],
         "exclude-from-classmap": []
     },

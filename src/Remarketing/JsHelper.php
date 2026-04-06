@@ -9,7 +9,7 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\Remarketing;
+namespace PrestaShop\Module\Newsmanv8\Remarketing;
 
 if (!defined('_PS_VERSION_')) {
     exit;

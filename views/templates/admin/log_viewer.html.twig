@@ -23,7 +23,7 @@
 <div class="card mb-4">
     <div class="card-header d-flex justify-content-between align-items-center">
         <div>
-            <img src="{{ asset('../modules/newsman/views/img/logo.png') }}" alt="Newsman" width="167" height="27">
+            <img src="{{ asset('../modules/newsmanv8/views/img/logo.png') }}" alt="Newsman" width="167" height="27">
         </div>
         <span class="badge badge-success bg-success">v{{ moduleVersion }}</span>
     </div>
@@ -32,13 +32,13 @@
 
         {% if logFiles is empty %}
         <div class="alert alert-info">
-            {{ 'No log files found. Logs will appear here once logging is enabled and events are recorded.'|trans({}, 'Modules.Newsman.Admin') }}
+            {{ 'No log files found. Logs will appear here once logging is enabled and events are recorded.'|trans({}, 'Modules.Newsmanv8.Admin') }}
         </div>
         {% else %}
 
         <div class="form-inline d-flex flex-wrap mb-3">
             <div class="form-group mr-3 me-3">
-                <label for="nzm-log-file" class="mr-2 me-2">{{ 'Log file'|trans({}, 'Modules.Newsman.Admin') }}:</label>
+                <label for="nzm-log-file" class="mr-2 me-2">{{ 'Log file'|trans({}, 'Modules.Newsmanv8.Admin') }}:</label>
                 <select id="nzm-log-file" class="form-control form-control-sm">
                     {% for file in logFiles %}
                     <option value="{{ file }}" {{ file == selectedFile ? 'selected' : '' }}>
@@ -48,31 +48,31 @@
                 </select>
             </div>
             <div class="form-group mr-3 me-3">
-                <label for="nzm-log-lines" class="mr-2 me-2">{{ 'Lines'|trans({}, 'Modules.Newsman.Admin') }}:</label>
+                <label for="nzm-log-lines" class="mr-2 me-2">{{ 'Lines'|trans({}, 'Modules.Newsmanv8.Admin') }}:</label>
                 <input type="number" id="nzm-log-lines" class="form-control form-control-sm" style="width: 80px"
                        value="{{ linesParam }}" min="1" max="2000">
             </div>
-            <button type="button" id="nzm-log-refresh" class="btn btn-sm btn-primary">{{ 'Refresh'|trans({}, 'Modules.Newsman.Admin') }}</button>
-            <form id="nzm-log-delete-form" method="post" action="{{ path('newsman_log_delete') }}" class="d-inline ml-2 ms-2">
+            <button type="button" id="nzm-log-refresh" class="btn btn-sm btn-primary">{{ 'Refresh'|trans({}, 'Modules.Newsmanv8.Admin') }}</button>
+            <form id="nzm-log-delete-form" method="post" action="{{ path('newsmanv8_log_delete') }}" class="d-inline ml-2 ms-2">
                 <input type="hidden" name="file" id="nzm-delete-file" value="{{ selectedFile }}">
-                <button type="button" id="nzm-log-delete" class="btn btn-sm btn-danger">{{ 'Delete'|trans({}, 'Modules.Newsman.Admin') }}</button>
+                <button type="button" id="nzm-log-delete" class="btn btn-sm btn-danger">{{ 'Delete'|trans({}, 'Modules.Newsmanv8.Admin') }}</button>
             </form>
         </div>
 
         {% if selectedFile %}
         <div class="mb-2 text-muted small">
             {% if totalLines >= 0 %}
-            {{ 'Showing %displayed% of %total% lines'|trans({'%displayed%': displayedLines, '%total%': totalLines}, 'Modules.Newsman.Admin') }}
+            {{ 'Showing %displayed% of %total% lines'|trans({'%displayed%': displayedLines, '%total%': totalLines}, 'Modules.Newsmanv8.Admin') }}
             {% else %}
-            {{ 'Showing last %displayed% lines'|trans({'%displayed%': displayedLines}, 'Modules.Newsman.Admin') }}
+            {{ 'Showing last %displayed% lines'|trans({'%displayed%': displayedLines}, 'Modules.Newsmanv8.Admin') }}
             {% endif %}
             &middot;
-            {{ 'File size: %size%'|trans({'%size%': (fileSize / 1024)|number_format(1) ~ ' KB'}, 'Modules.Newsman.Admin') }}
+            {{ 'File size: %size%'|trans({'%size%': (fileSize / 1024)|number_format(1) ~ ' KB'}, 'Modules.Newsmanv8.Admin') }}
         </div>
 
         <div class="nzm-log-viewer">
             {% if logContent is empty %}
-            <span class="text-muted">{{ 'Log file is empty.'|trans({}, 'Modules.Newsman.Admin') }}</span>
+            <span class="text-muted">{{ 'Log file is empty.'|trans({}, 'Modules.Newsmanv8.Admin') }}</span>
             {% else %}
                 {% for line in logContent %}
                     {%- if '] ERROR:' in line or '] EMERGENCY:' in line or '] ALERT:' in line or '] CRITICAL:' in line -%}
@@ -98,7 +98,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    var baseUrl = '{{ path('newsman_log_viewer')|e('js') }}';
+    var baseUrl = '{{ path('newsmanv8_log_viewer')|e('js') }}';
     var refreshBtn = document.getElementById('nzm-log-refresh');
     var fileSelect = document.getElementById('nzm-log-file');
     var linesInput = document.getElementById('nzm-log-lines');

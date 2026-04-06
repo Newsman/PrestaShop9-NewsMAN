@@ -10,14 +10,14 @@
  */
 declare(strict_types=1);
 
-namespace PrestaShop\Module\Newsman\Controller\Admin;
+namespace PrestaShop\Module\Newsmanv8\Controller\Admin;
 
-use PrestaShop\Module\Newsman\Config;
-use PrestaShop\Module\Newsman\Logger;
-use PrestaShop\Module\Newsman\Service\Configuration\Remarketing\GetSettings as RemarketingGetSettings;
-use PrestaShop\Module\Newsman\Service\Context\Configuration\EmailList as EmailListContext;
-use PrestaShop\Module\Newsman\Util\LogFileReader;
-use PrestaShop\Module\Newsman\Util\Version;
+use PrestaShop\Module\Newsmanv8\Config;
+use PrestaShop\Module\Newsmanv8\Logger;
+use PrestaShop\Module\Newsmanv8\Service\Configuration\Remarketing\GetSettings as RemarketingGetSettings;
+use PrestaShop\Module\Newsmanv8\Service\Context\Configuration\EmailList as EmailListContext;
+use PrestaShop\Module\Newsmanv8\Util\LogFileReader;
+use PrestaShop\Module\Newsmanv8\Util\Version;
 use PrestaShop\PrestaShop\Core\Context\ShopContext;
 use PrestaShop\PrestaShop\Core\Form\FormHandlerInterface;
 use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
@@ -41,7 +41,7 @@ class ConfigurationController extends PrestaShopAdminController
         Logger $logger,
         RemarketingGetSettings $remarketingGetSettings,
         ShopContext $shopContext,
-        #[Autowire(service: 'newsman.form.configuration_handler')]
+        #[Autowire(service: 'newsmanv8.form.configuration_handler')]
         FormHandlerInterface $formHandler,
     ): Response {
         $logFileReader->cleanOldLogs();
@@ -77,7 +77,7 @@ class ConfigurationController extends PrestaShopAdminController
                 : str_repeat('*', $len);
         }
 
-        return $this->render('@Modules/newsman/views/templates/admin/configure.html.twig', [
+        return $this->render('@Modules/newsmanv8/views/templates/admin/configure.html.twig', [
             'maskedAuthenticateToken' => $maskedToken,
             'configurationForm' => $form->createView(),
             'isConnected' => $config->isEnabledWithApiOnly() && !empty($form->get('list_id')->getConfig()->getOption('choices')),
@@ -103,7 +103,7 @@ class ConfigurationController extends PrestaShopAdminController
         $fs = new Filesystem();
         $modulesDir = _PS_MODULE_DIR_;
 
-        foreach ([Config::CONFLICTING_MODULE_NEWSMANAPP, Config::CONFLICTING_MODULE_NEWSMANV8] as $moduleName) {
+        foreach ([Config::CONFLICTING_MODULE_NEWSMANAPP, Config::CONFLICTING_MODULE_NEWSMAN] as $moduleName) {
             if ($fs->exists($modulesDir . $moduleName)) {
                 $conflicting[] = $moduleName;
             }

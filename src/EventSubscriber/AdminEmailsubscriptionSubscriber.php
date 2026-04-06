@@ -9,10 +9,10 @@
  * @website https://www.newsman.ro/
  */
 
-namespace PrestaShop\Module\Newsman\EventSubscriber;
+namespace PrestaShop\Module\Newsmanv8\EventSubscriber;
 
-use PrestaShop\Module\Newsman\Action\Subscribe\Email as SubscribeEmailAction;
-use PrestaShop\Module\Newsman\Logger;
+use PrestaShop\Module\Newsmanv8\Action\Subscribe\Email as SubscribeEmailAction;
+use PrestaShop\Module\Newsmanv8\Logger;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
