@@ -86,10 +86,10 @@ class ProductsFeed extends AbstractRetriever implements RetrieverInterface
         // Build stock_available join condition (handles shared stock)
         $stockJoinCondition = 'p.id_product = sa.id_product AND sa.id_product_attribute = 0';
         if (!empty($shopIds)) {
-            $groupedShops = Config::groupShopIdsByGroup($shopIds);
+            $groupedShops = $this->config->groupShopIdsByGroup($shopIds);
             $stockConditions = [];
             foreach ($groupedShops as $groupId => $gShopIds) {
-                $flags = Config::getShopGroupSharingFlags($gShopIds[0]);
+                $flags = $this->config->getShopGroupSharingFlags($gShopIds[0]);
                 if ($flags['share_stock']) {
                     $stockConditions[] = 'sa.id_shop_group = ' . (int) $groupId;
                 } else {

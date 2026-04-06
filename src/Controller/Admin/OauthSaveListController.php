@@ -72,6 +72,7 @@ class OauthSaveListController extends PrestaShopAdminController
             $logger,
             $saveListIntegrationSetup,
             $serverIpResolver,
+            $newsmanConfig,
             $userId,
             $apiKey,
             $listId,
@@ -162,13 +163,14 @@ class OauthSaveListController extends PrestaShopAdminController
         Logger $logger,
         SaveListIntegrationSetup $saveListIntegrationSetup,
         ServerIpResolver $serverIpResolver,
+        Config $newsmanConfig,
         string $userId,
         string $apiKey,
         string $listId,
         string $authenticateToken,
     ): void {
         try {
-            $shopUrl = (new \Shop(Config::getEffectiveShopId()))->getBaseURL(true);
+            $shopUrl = (new \Shop($newsmanConfig->getEffectiveShopId()))->getBaseURL(true);
             $apiUrl = $shopUrl . 'index.php?fc=module&module=newsman&controller=api';
             $serverIp = $serverIpResolver->resolve();
 

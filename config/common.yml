@@ -4,10 +4,17 @@ services:
     autowire: true
     autoconfigure: true
 
-  # Config (wraps PS9 Configuration adapter)
+  # Shop Context adapter (registered here because prestashop.adapter.shop.context
+  # is only available in the Symfony admin container, not in the legacy front container)
+  newsman.shop.context:
+    class: PrestaShop\PrestaShop\Adapter\Shop\Context
+    public: true
+
+  # Config (wraps PS9 Configuration adapter + Shop Context)
   PrestaShop\Module\Newsman\Config:
     arguments:
-      - '@prestashop.adapter.legacy.configuration'
+      $configuration: '@prestashop.adapter.legacy.configuration'
+      $shopContext: '@newsman.shop.context'
 
   # Logger
   PrestaShop\Module\Newsman\Logger: ~
@@ -20,7 +27,11 @@ services:
 
   # Actions
   PrestaShop\Module\Newsman\Action\Subscribe\Email: ~
-  PrestaShop\Module\Newsman\Action\Reverse\NewsletterManager: ~
+  PrestaShop\Module\Newsman\Action\Reverse\NewsletterManager:
+    arguments:
+      $config: '@PrestaShop\Module\Newsman\Config'
+      $configuration: '@prestashop.adapter.legacy.configuration'
+      $shopContext: '@newsman.shop.context'
   PrestaShop\Module\Newsman\Action\Order\Save:
     arguments:
       $configuration: '@prestashop.adapter.legacy.configuration'

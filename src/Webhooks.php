@@ -134,7 +134,7 @@ class Webhooks
      */
     protected function resolveLinkedShopIds(): array
     {
-        $shopId = Config::getEffectiveShopId();
+        $shopId = $this->config->getEffectiveShopId();
         $listId = $this->config->getListId(Config::shopConstraint($shopId));
         if (!empty($listId)) {
             $shopIds = $this->config->getShopIdsByListId($listId);

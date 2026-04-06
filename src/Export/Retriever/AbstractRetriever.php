@@ -238,7 +238,7 @@ abstract class AbstractRetriever implements RetrieverInterface
 
     protected function getShopUrl(?int $shopId = null): string
     {
-        $currentShopId = Config::getEffectiveShopId();
+        $currentShopId = $this->config->getEffectiveShopId();
         if ($shopId !== null && $currentShopId !== $shopId) {
             $shop = new \Shop($shopId);
             $url = $shop->getBaseURL(true);

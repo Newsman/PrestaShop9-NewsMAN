@@ -14,9 +14,18 @@
 namespace PrestaShop\Module\Newsman\Action\Reverse;
 
 use PrestaShop\Module\Newsman\Config;
+use PrestaShop\PrestaShop\Adapter\Configuration;
+use PrestaShop\PrestaShop\Adapter\Shop\Context as ShopContext;
 
 class NewsletterManager
 {
+    public function __construct(
+        protected Config $config,
+        protected Configuration $configuration,
+        protected ShopContext $shopContext,
+    ) {
+    }
+
     public function subscribe(string $email, ?int $shopId = null): bool
     {
         $shopFilter = null !== $shopId ? ' AND id_shop = ' . (int) $shopId : '';
@@ -47,8 +56,8 @@ class NewsletterManager
             );
         }
 
-        $idShop = $shopId ?? (int) \Configuration::get('PS_SHOP_DEFAULT');
-        $idShopGroup = (int) \Shop::getGroupFromShop($idShop);
+        $idShop = $shopId ?? $this->config->getEffectiveShopId();
+        $idShopGroup = (int) $this->shopContext->getGroupFromShop($idShop);
         $idLang = (int) \Configuration::get('PS_LANG_DEFAULT', null, $idShopGroup, $idShop);
 
         return (bool) \Db::getInstance()->execute(
@@ -129,7 +138,7 @@ class NewsletterManager
         if ($moduleId <= 0) {
             return false;
         }
-        $shopId = Config::getEffectiveShopId();
+        $shopId = $this->config->getEffectiveShopId();
         $sql = 'SELECT 1 FROM `' . _DB_PREFIX_ . 'module_shop` WHERE `id_module` = ' . $moduleId . ' AND `id_shop` = ' . $shopId;
 
         return (bool) \Db::getInstance()->getValue($sql);

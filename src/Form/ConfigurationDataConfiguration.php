@@ -267,7 +267,7 @@ class ConfigurationDataConfiguration extends AbstractMultistoreConfiguration
         }
 
         try {
-            $shopUrl = (new \Shop(Config::getEffectiveShopId()))->getBaseURL(true);
+            $shopUrl = (new \Shop($this->newsmanConfig->getEffectiveShopId()))->getBaseURL(true);
             $apiUrl = $shopUrl . 'index.php?fc=module&module=newsman&controller=api';
             $serverIp = $this->serverIpResolver->resolve();
 

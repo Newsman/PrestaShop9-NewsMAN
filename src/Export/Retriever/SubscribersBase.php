@@ -13,8 +13,6 @@
 
 namespace PrestaShop\Module\Newsman\Export\Retriever;
 
-use PrestaShop\Module\Newsman\Config;
-
 class SubscribersBase extends AbstractRetriever implements RetrieverInterface
 {
     public const DEFAULT_PAGE_SIZE = 1000;
@@ -243,7 +241,7 @@ class SubscribersBase extends AbstractRetriever implements RetrieverInterface
         if ($moduleId <= 0) {
             return false;
         }
-        $shopId = Config::getEffectiveShopId();
+        $shopId = $this->config->getEffectiveShopId();
         $sql = 'SELECT 1 FROM `' . _DB_PREFIX_ . 'module_shop` WHERE `id_module` = ' . $moduleId . ' AND `id_shop` = ' . $shopId;
 
         return (bool) \Db::getInstance()->getValue($sql);

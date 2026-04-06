@@ -14,6 +14,7 @@
 namespace PrestaShop\Module\Newsman;
 
 use PrestaShop\PrestaShop\Adapter\Configuration;
+use PrestaShop\PrestaShop\Adapter\Shop\Context as ShopContext;
 use PrestaShop\PrestaShop\Core\Domain\Shop\ValueObject\ShopConstraint;
 
 class Config
@@ -66,6 +67,7 @@ class Config
 
     public function __construct(
         protected Configuration $configuration,
+        protected ShopContext $shopContext,
     ) {
     }
 
@@ -265,7 +267,7 @@ class Config
             return $shopConstraint->getShopId()->getValue();
         }
 
-        return self::getEffectiveShopId();
+        return $this->getEffectiveShopId();
     }
 
     /**
@@ -275,14 +277,14 @@ class Config
      * whereas Context::getContext()->shop->id always returns a valid shop ID.
      * This helper replicates that behavior without using Context::getContext().
      */
-    public static function getEffectiveShopId(): int
+    public function getEffectiveShopId(): int
     {
-        $shopId = (int) \Shop::getContextShopID();
+        $shopId = (int) $this->shopContext->getContextShopID();
         if ($shopId > 0) {
             return $shopId;
         }
 
-        $defaultShopId = (int) \Configuration::get('PS_SHOP_DEFAULT');
+        $defaultShopId = (int) $this->configuration->get('PS_SHOP_DEFAULT');
 
         return $defaultShopId > 0 ? $defaultShopId : 1;
     }
@@ -448,10 +450,10 @@ class Config
      *
      * @return array{share_customer: bool, share_order: bool, share_stock: bool}
      */
-    public static function getShopGroupSharingFlags(int $shopId): array
+    public function getShopGroupSharingFlags(int $shopId): array
     {
-        $groupId = (int) \Shop::getGroupFromShop($shopId);
-        $group = new \ShopGroup($groupId);
+        $groupId = (int) $this->shopContext->getGroupFromShop($shopId);
+        $group = $this->shopContext->ShopGroup($groupId);
 
         return [
             'share_customer' => (bool) $group->share_customer,
@@ -467,11 +469,11 @@ class Config
      *
      * @return array<int, array<int>>
      */
-    public static function groupShopIdsByGroup(array $shopIds): array
+    public function groupShopIdsByGroup(array $shopIds): array
     {
         $groups = [];
         foreach ($shopIds as $shopId) {
-            $groupId = (int) \Shop::getGroupFromShop((int) $shopId);
+            $groupId = (int) $this->shopContext->getGroupFromShop((int) $shopId);
             $groups[$groupId][] = (int) $shopId;
         }
 
@@ -487,14 +489,14 @@ class Config
     public function getCrossGroupInfo(string $listId): array
     {
         $shopIds = $this->getShopIdsByListId($listId);
-        $grouped = self::groupShopIdsByGroup($shopIds);
+        $grouped = $this->groupShopIdsByGroup($shopIds);
         if (count($grouped) <= 1) {
             return [];
         }
 
         $info = [];
         foreach ($grouped as $groupId => $gShopIds) {
-            $group = new \ShopGroup($groupId);
+            $group = $this->shopContext->ShopGroup($groupId);
             $shopNames = [];
             foreach ($gShopIds as $sid) {
                 $shop = new \Shop($sid);
