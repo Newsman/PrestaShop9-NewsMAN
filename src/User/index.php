@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright © Dazoot Software S.R.L. All rights reserved.
  *
