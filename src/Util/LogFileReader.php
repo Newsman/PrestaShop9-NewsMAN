@@ -62,7 +62,7 @@ class LogFileReader
             return false;
         }
 
-        $path = $this->logDir . $filename;
+        $path = $this->logDir . basename($filename);
 
         if (!is_file($path)) {
             return false;
@@ -73,7 +73,11 @@ class LogFileReader
 
     public function getFileSize(string $filename): int
     {
-        $path = $this->logDir . $filename;
+        if (!$this->isValidFilename($filename)) {
+            return 0;
+        }
+
+        $path = $this->logDir . basename($filename);
 
         if (!is_file($path)) {
             return 0;
@@ -91,7 +95,11 @@ class LogFileReader
      */
     public function readTail(string $filename, int $lineCount): array
     {
-        $filePath = $this->logDir . $filename;
+        if (!$this->isValidFilename($filename)) {
+            return [[], 0];
+        }
+
+        $filePath = $this->logDir . basename($filename);
 
         if (!is_file($filePath) || !is_readable($filePath)) {
             return [[], 0];
