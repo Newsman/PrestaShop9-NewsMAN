@@ -46,10 +46,6 @@ class ConfigurationController extends PrestaShopAdminController
     ): Response {
         $logFileReader->cleanOldLogs();
 
-        if (!$config->hasApiAccess()) {
-            return $this->redirectToRoute('newsmanv8_oauth_step1');
-        }
-
         $form = $formHandler->getForm();
         $form->handleRequest($request);
 
