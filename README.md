@@ -4,7 +4,7 @@ The [NewsMAN](https://www.newsmanapp.com) module for PrestaShop 9 facilitates se
 
 > [!NOTE]
 > For older PrestaShop versions, use the previous module releases:
-> - **PrestaShop 1.8.x**: [Newsman/PrestaShop8-NewsMAN](https://github.com/Newsman/PrestaShop8-NewsMAN)
+> - **PrestaShop 8.x**: [Newsman/PrestaShop8-NewsMAN](https://github.com/Newsman/PrestaShop8-NewsMAN)
 > - **PrestaShop 1.6.x – 1.7.x**: [Newsman/PrestaShop-Newsman](https://github.com/Newsman/PrestaShop-Newsman)
 
 # Installation
