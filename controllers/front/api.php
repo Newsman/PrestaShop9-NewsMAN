@@ -35,6 +35,8 @@ class Newsmanv8ApiModuleFrontController extends ModuleFrontController
             $router = $this->get(Router::class);
             $router->execute();
         }
+
+        exit(0);
     }
 
     protected function isWebhookRequest(): bool

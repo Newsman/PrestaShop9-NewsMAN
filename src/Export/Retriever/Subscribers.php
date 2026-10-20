@@ -11,6 +11,8 @@
 
 namespace PrestaShop\Module\Newsmanv8\Export\Retriever;
 
+use PrestaShop\Module\Newsmanv8\Util\CustomerName;
+
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -28,10 +30,11 @@ class Subscribers extends SubscribersBase
      */
     public function processSubscriber(array $subscriber, array $phones = [], array $shopIds = []): array
     {
+        [$firstname, $lastname] = CustomerName::clean($subscriber['firstname'], $subscriber['lastname']);
         $row = [
             'subscriber_id' => (string) $subscriber['subscriber_id'],
-            'firstname' => $subscriber['firstname'],
-            'lastname' => $subscriber['lastname'],
+            'firstname' => $firstname,
+            'lastname' => $lastname,
             'email' => $subscriber['email'],
             'date_subscribed' => $subscriber['date_added'],
             'confirmed' => 1,

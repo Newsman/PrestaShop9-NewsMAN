@@ -11,6 +11,8 @@
 
 namespace PrestaShop\Module\Newsmanv8\Export\Retriever;
 
+use PrestaShop\Module\Newsmanv8\Util\CustomerName;
+
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -189,10 +191,11 @@ class Customers extends AbstractRetriever implements RetrieverInterface
      */
     protected function processCustomer(array $customer, array $phones, array $shopIds = []): array
     {
+        [$firstname, $lastname] = CustomerName::clean($customer['firstname'], $customer['lastname']);
         $row = [
             'customer_id' => $customer['customer_id'],
-            'firstname' => $customer['firstname'],
-            'lastname' => $customer['lastname'],
+            'firstname' => $firstname,
+            'lastname' => $lastname,
             'email' => $customer['email'],
             'date_created' => $customer['date_added'],
             'source' => 'PrestaShop customers',

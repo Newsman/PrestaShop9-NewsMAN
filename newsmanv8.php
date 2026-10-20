@@ -15,6 +15,7 @@ use PrestaShop\Module\Newsmanv8\Action\Subscribe\Email as SubscribeEmailAction;
 use PrestaShop\Module\Newsmanv8\Config;
 use PrestaShop\Module\Newsmanv8\Logger;
 use PrestaShop\Module\Newsmanv8\Remarketing\Renderer as RemarketingRenderer;
+use PrestaShop\Module\Newsmanv8\Util\CustomerName;
 
 if (!defined('_PS_VERSION_')) {
     exit;
@@ -118,7 +119,7 @@ class Newsmanv8 extends Module
     {
         $this->name = 'newsmanv8';
         $this->tab = 'advertising_marketing';
-        $this->version = '9.0.6';
+        $this->version = '9.0.7';
         $this->author = 'Newsman by Dazoot';
         $this->module_key = '00c167886eb6f3c7d318ea806a563b32';
         $this->need_instance = 0;
@@ -384,11 +385,12 @@ class Newsmanv8 extends Module
             return;
         }
 
+        [$firstname, $lastname] = CustomerName::fromCustomer($customer);
         $action = $this->get(SubscribeEmailAction::class);
         $action->subscribe(
             $customer->email,
-            $customer->firstname,
-            $customer->lastname,
+            $firstname,
+            $lastname,
             [],
             [],
             $shopConstraint
@@ -436,10 +438,11 @@ class Newsmanv8 extends Module
 
         if ($oldNewsletter !== $newNewsletter) {
             if ($newNewsletter && !$oldNewsletter) {
+                [$firstname, $lastname] = CustomerName::fromCustomer($customer);
                 $action->subscribe(
                     $customer->email,
-                    $customer->firstname,
-                    $customer->lastname,
+                    $firstname,
+                    $lastname,
                     [],
                     [],
                     $shopConstraint
@@ -573,11 +576,12 @@ class Newsmanv8 extends Module
                     : time();
                 $oneHourAgo = time() - 3600;
                 if ($newsletterDate !== false && $newsletterDate >= $oneHourAgo) {
+                    [$firstname, $lastname] = CustomerName::fromCustomer($customer);
                     $subscribeAction = $this->get(SubscribeEmailAction::class);
                     $subscribeAction->subscribe(
                         $customer->email,
-                        $customer->firstname,
-                        $customer->lastname,
+                        $firstname,
+                        $lastname,
                         [],
                         [],
                         $shopConstraint
